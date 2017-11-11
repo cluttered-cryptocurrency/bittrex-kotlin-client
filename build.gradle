@@ -9,17 +9,6 @@ if (!JavaVersion.current().java8Compatible) {
 group 'com.cluttered-cryptocurrency'
 version '0.1.0'
 
-//buildscript {
-//    ext.kotlin_version = '1.1.51'
-//
-//    repositories {
-//        mavenCentral()
-//    }
-//    dependencies {
-//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-//    }
-//}
-
 apply plugin: 'idea'
 apply plugin: 'kotlin'
 
@@ -27,6 +16,7 @@ ext {
     _gradle_version = '4.3.1'
 
     retrofit_version = '2.3.0'
+    rxkotlin_version = '2.1.0'
 
     junit_version = '4.12'
 }
@@ -42,6 +32,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    compile "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 }
 
 compileKotlin {
