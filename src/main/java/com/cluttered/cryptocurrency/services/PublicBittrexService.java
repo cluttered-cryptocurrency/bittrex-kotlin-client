@@ -2,13 +2,13 @@ package com.cluttered.cryptocurrency.services;
 
 import com.cluttered.cryptocurrency.models.ApiResponse;
 import com.cluttered.cryptocurrency.models.MarketCurrency;
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface PublicBittrexService {
 
     @GET("v1.1/public/getmarkets")
-    Call<ApiResponse<MarketCurrency>> getMarketCurrencies();
+    Observable<ApiResponse<MarketCurrency>> getMarketCurrencies();
 
 
 //    @Headers({ "Accept: application/json" })

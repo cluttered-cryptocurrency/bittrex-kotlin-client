@@ -2,6 +2,7 @@ package com.cluttered.cryptocurrency.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.Optional;
 
 public class MarketCurrency {
@@ -25,8 +26,8 @@ public class MarketCurrency {
     @SerializedName("IsActive")
     private boolean isActive;
 
-//    @SerializedName("Created")
-//    private Date created;
+    @SerializedName("Created")
+    private Date created;
 
     @SerializedName("LogoUrl")
     private String logoUrl;
@@ -59,9 +60,9 @@ public class MarketCurrency {
         return isActive;
     }
 
-//    public Date getCreated() {
-//        return created;
-//    }
+    public Date getCreated() {
+        return created;
+    }
 
     public Optional<String> getLogoUrl() {
         return Optional.ofNullable(logoUrl);
