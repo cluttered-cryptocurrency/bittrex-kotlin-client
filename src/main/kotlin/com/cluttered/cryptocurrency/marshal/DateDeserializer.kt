@@ -1,4 +1,4 @@
-package com.cluttered.cryptocurrency
+package com.cluttered.cryptocurrency.marshal
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
