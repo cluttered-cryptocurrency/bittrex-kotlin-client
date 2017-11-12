@@ -1,8 +1,6 @@
 package com.cluttered.cryptocurrency
 
-import com.cluttered.cryptocurrency.models.ApiResponse
-import com.cluttered.cryptocurrency.models.Currency
-import com.cluttered.cryptocurrency.models.Market
+import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.services.PublicBittrexService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -13,9 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object BittrexClient : PublicBittrexService {
 
-    private val BITTREX_API_URL : String = "https://bittrex.com/api/"
+    private val BITTREX_API_URL: String = "https://bittrex.com/api/"
 
-    private val GSON : Gson = GsonBuilder()
+    private val GSON: Gson = GsonBuilder()
             .setLenient()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
             .create()
@@ -29,11 +27,15 @@ object BittrexClient : PublicBittrexService {
 
     private val publicService = retrofit.create(PublicBittrexService::class.java)
 
-    override fun getMarkets(): Observable<ApiResponse<Market>>  {
+    override fun getMarkets(): Observable<ApiListResponse<Market>> {
         return publicService.getMarkets()
     }
 
-    override fun getCurrencies(): Observable<ApiResponse<Currency>>  {
+    override fun getCurrencies(): Observable<ApiListResponse<Currency>> {
         return publicService.getCurrencies()
+    }
+
+    override fun getTicker(market: String): Observable<ApiResponse<Ticker>> {
+        return publicService.getTicker(market)
     }
 }

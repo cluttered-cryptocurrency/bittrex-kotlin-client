@@ -30,5 +30,10 @@ object Main {
                 .filter { it.currency == "ETH" }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
+
+        BittrexClient.getTicker("BTC-ETH")
+                .map { it.result }
+                .map { GSON.toJson(it) }
+                .subscribe { println(it) }
     }
 }

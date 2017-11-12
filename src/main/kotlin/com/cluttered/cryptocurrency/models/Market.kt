@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 data class Market(
-
         @SerializedName("MarketCurrency") val marketCurrency: String,
         @SerializedName("BaseCurrency") val baseCurrency: String,
 
