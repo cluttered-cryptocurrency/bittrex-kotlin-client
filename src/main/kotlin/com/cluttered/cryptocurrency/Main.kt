@@ -23,7 +23,6 @@ object Main {
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-
         BittrexClient.getCurrencies()
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
