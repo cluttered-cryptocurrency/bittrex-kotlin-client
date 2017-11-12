@@ -1,6 +1,6 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.OrderType
+import com.cluttered.cryptocurrency.types.OrderType
 import com.cluttered.cryptocurrency.models.*
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -29,4 +29,7 @@ interface PublicBittrexService {
 
     @GET(V1_1_PUBLIC + "getorderbook")
     fun getOrderBook(@Query("market") market: String, @Query("type") type: OrderType): Observable<ApiResponse<OrdersByType>>
+
+    @GET(V1_1_PUBLIC + "getmarkethistory")
+    fun getMarketHistory(@Query("market") market: String): Observable<ApiListResponse<Trade>>
 }

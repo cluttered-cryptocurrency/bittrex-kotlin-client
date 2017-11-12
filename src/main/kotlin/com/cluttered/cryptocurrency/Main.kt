@@ -1,5 +1,6 @@
 package com.cluttered.cryptocurrency
 
+import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
@@ -50,6 +51,12 @@ object Main {
 
         BittrexClient.getOrderBook("BTC-ETH", OrderType.BOTH)
                 .map { it.result }
+                .map { GSON.toJson(it) }
+                .subscribe { println(it) }
+
+        BittrexClient.getMarketHistory("BTC-ETH")
+                .map { it.result }
+                .flatMap { Observable.fromIterable(it) }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
     }

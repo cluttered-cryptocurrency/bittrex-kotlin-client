@@ -4,6 +4,7 @@ import com.cluttered.cryptocurrency.marshal.DateDeserializer
 import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.models.Currency
 import com.cluttered.cryptocurrency.services.PublicBittrexService
+import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
@@ -51,5 +52,9 @@ object BittrexClient : PublicBittrexService {
 
     override fun getOrderBook(market: String, type: OrderType): Observable<ApiResponse<OrdersByType>> {
         return publicService.getOrderBook(market, type)
+    }
+
+    override fun getMarketHistory(market: String): Observable<ApiListResponse<Trade>> {
+        return publicService.getMarketHistory(market)
     }
 }

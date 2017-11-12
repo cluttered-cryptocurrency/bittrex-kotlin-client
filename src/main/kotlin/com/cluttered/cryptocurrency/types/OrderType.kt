@@ -1,4 +1,4 @@
-package com.cluttered.cryptocurrency
+package com.cluttered.cryptocurrency.types
 
 enum class OrderType {
     BUY,
