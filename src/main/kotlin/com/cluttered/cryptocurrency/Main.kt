@@ -41,5 +41,16 @@ object Main {
                 .filter { it.marketName == "BTC-ETH" }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
+
+        BittrexClient.getMarketSummary("BTC-ETH")
+                .map { it.result }
+                .flatMap { Observable.fromIterable(it) }
+                .map { GSON.toJson(it) }
+                .subscribe { println(it) }
+
+        BittrexClient.getOrderBook("BTC-ETH", OrderType.BOTH)
+                .map { it.result }
+                .map { GSON.toJson(it) }
+                .subscribe { println(it) }
     }
 }

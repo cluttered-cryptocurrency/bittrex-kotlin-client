@@ -43,4 +43,12 @@ object BittrexClient : PublicBittrexService {
     override fun getMarketSummaries(): Observable<ApiListResponse<MarketSummary>> {
         return publicService.getMarketSummaries()
     }
+
+    override fun getMarketSummary(market: String): Observable<ApiListResponse<MarketSummary>> {
+        return publicService.getMarketSummary(market)
+    }
+
+    override fun getOrderBook(market: String, type: OrderType): Observable<ApiResponse<OrdersByType>> {
+        return publicService.getOrderBook(market, type)
+    }
 }
