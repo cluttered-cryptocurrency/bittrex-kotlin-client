@@ -15,4 +15,7 @@ interface PublicBittrexService {
 
     @GET("v1.1/public/getticker")
     fun getTicker(@Query("market") market: String): Observable<ApiResponse<Ticker>>
+
+    @GET("v1.1/public/getmarketsummaries ")
+    fun getMarketSummaries(): Observable<ApiListResponse<MarketSummary>>
 }

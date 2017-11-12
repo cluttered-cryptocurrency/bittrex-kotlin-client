@@ -34,5 +34,12 @@ object Main {
                 .map { it.result }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
+
+        BittrexClient.getMarketSummaries()
+                .map { it.result }
+                .flatMap { Observable.fromIterable(it) }
+                .filter { it.marketName == "BTC-ETH" }
+                .map { GSON.toJson(it) }
+                .subscribe { println(it) }
     }
 }
