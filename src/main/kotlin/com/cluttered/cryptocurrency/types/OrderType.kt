@@ -5,7 +5,5 @@ enum class OrderType {
     SELL,
     BOTH;
 
-    override fun toString(): String {
-        return super.toString().toLowerCase()
-    }
+    override fun toString(): String = super.toString().toLowerCase()
 }

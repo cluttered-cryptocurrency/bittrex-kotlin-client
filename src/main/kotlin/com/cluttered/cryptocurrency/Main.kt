@@ -14,47 +14,49 @@ object Main {
             .setPrettyPrinting()
             .create()
 
+    private val bittrexClient: BittrexClient = BittrexClient()
+
     @JvmStatic
     fun main(args: Array<String>) {
 
-        BittrexClient.getMarkets()
+        bittrexClient.getMarkets()
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
                 .filter { it.marketName == "BTC-ETH" }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-        BittrexClient.getCurrencies()
+        bittrexClient.getCurrencies()
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
                 .filter { it.currency == "ETH" }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-        BittrexClient.getTicker("BTC-ETH")
+        bittrexClient.getTicker("BTC-ETH")
                 .map { it.result }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-        BittrexClient.getMarketSummaries()
+        bittrexClient.getMarketSummaries()
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
                 .filter { it.marketName == "BTC-ETH" }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-        BittrexClient.getMarketSummary("BTC-ETH")
+        bittrexClient.getMarketSummary("BTC-ETH")
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-        BittrexClient.getOrderBook("BTC-ETH", OrderType.BOTH)
+        bittrexClient.getOrderBook("BTC-ETH", OrderType.BOTH)
                 .map { it.result }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
 
-        BittrexClient.getMarketHistory("BTC-ETH")
+        bittrexClient.getMarketHistory("BTC-ETH")
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
                 .map { GSON.toJson(it) }

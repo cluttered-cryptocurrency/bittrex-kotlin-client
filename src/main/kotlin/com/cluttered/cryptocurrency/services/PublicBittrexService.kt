@@ -1,7 +1,7 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.types.OrderType
 import com.cluttered.cryptocurrency.models.*
+import com.cluttered.cryptocurrency.types.OrderType
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
