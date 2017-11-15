@@ -14,7 +14,7 @@ class ApiSignInterceptor : Interceptor {
         val key: String? = url.queryParameter("apikey")
         if (key != null) {
             val currentMillis = System.currentTimeMillis()
-            val modifiedUrl = url.toString() + "?nonce=" + currentMillis
+            val modifiedUrl = url.toString() + "&nonce=" + currentMillis
             val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret!!)
             val request: Request = chain.request().newBuilder()
                     .url(modifiedUrl)
