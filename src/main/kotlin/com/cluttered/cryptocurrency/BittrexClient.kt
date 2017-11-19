@@ -5,8 +5,7 @@ import com.cluttered.cryptocurrency.credentials.Credentials
 import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.models.Currency
 import com.cluttered.cryptocurrency.serializers.DateDeserializer
-import com.cluttered.cryptocurrency.services.AccountBittrexService
-import com.cluttered.cryptocurrency.services.PublicBittrexService
+import com.cluttered.cryptocurrency.services.*
 import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
@@ -17,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.security.KeyException
 import java.util.*
 
-class BittrexClient(private val key: String? = null, private val secret: String? = null) : PublicBittrexService {
+class BittrexClient(private val key: String? = null, private val secret: String? = null) {
 
     private val BITTREX_API_URL: String = "https://bittrex.com/api/"
 
@@ -47,21 +46,21 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         accountService = retrofit.create(AccountBittrexService::class.java)
     }
 
-    override fun getMarkets(): Observable<ApiListResponse<Market>> = publicService.getMarkets()
+    fun getMarkets(): Observable<ApiListResponse<Market>> = publicService.getMarkets()
 
-    override fun getCurrencies(): Observable<ApiListResponse<Currency>> = publicService.getCurrencies()
+    fun getCurrencies(): Observable<ApiListResponse<Currency>> = publicService.getCurrencies()
 
-    override fun getTicker(market: String): Observable<ApiResponse<Ticker>> = publicService.getTicker(market)
+    fun getTicker(market: String): Observable<ApiResponse<Ticker>> = publicService.getTicker(market)
 
-    override fun getMarketSummaries(): Observable<ApiListResponse<MarketSummary>> = publicService.getMarketSummaries()
+    fun getMarketSummaries(): Observable<ApiListResponse<MarketSummary>> = publicService.getMarketSummaries()
 
-    override fun getMarketSummary(market: String): Observable<ApiListResponse<MarketSummary>> =
+    fun getMarketSummary(market: String): Observable<ApiListResponse<MarketSummary>> =
             publicService.getMarketSummary(market)
 
-    override fun getOrderBook(market: String, type: OrderType): Observable<ApiResponse<OrdersByType>> =
+    fun getOrderBook(market: String, type: OrderType): Observable<ApiResponse<OrdersByType>> =
             publicService.getOrderBook(market, type)
 
-    override fun getMarketHistory(market: String): Observable<ApiListResponse<Trade>> =
+    fun getMarketHistory(market: String): Observable<ApiListResponse<Trade>> =
             publicService.getMarketHistory(market)
 
     fun getBalances(): Observable<ApiListResponse<Balance>> {
@@ -69,6 +68,7 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         return accountService.getBalances(Credentials.key!!)
     }
 
+    @Throws(KeyException::class)
     private fun credentialsPresent() {
         if (Credentials.key == null || Credentials.secret == null)
             throw KeyException("missing 'key' or 'secret' credentials")

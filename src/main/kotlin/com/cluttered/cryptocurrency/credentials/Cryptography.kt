@@ -15,11 +15,8 @@ object Cryptography {
         val secretKeySpec = SecretKeySpec(secret.toByteArray(), HMAC_SHA512)
         val mac = Mac.getInstance(HMAC_SHA512)
         mac.init(secretKeySpec)
-        val bytes: ByteArray = mac.doFinal(uri.toByteArray())
-        var hexString = ""
-        for (byte in bytes) {
-            hexString += String.format("%02X", byte)
-        }
-        return hexString
+        return mac.doFinal(uri.toByteArray())
+                .map { String.format("%02X", it) }
+                .reduce { acc, s -> acc + s  }
     }
 }
