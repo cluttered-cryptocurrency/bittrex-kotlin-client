@@ -68,6 +68,11 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         return accountService.getBalances(Credentials.key!!)
     }
 
+    fun getBalance(currency: String): Observable<ApiResponse<Balance>> {
+        credentialsPresent()
+        return accountService.getBalance(Credentials.key!!, currency)
+    }
+
     @Throws(KeyException::class)
     private fun credentialsPresent() {
         if (Credentials.key == null || Credentials.secret == null)

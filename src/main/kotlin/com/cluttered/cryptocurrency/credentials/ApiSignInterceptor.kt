@@ -8,7 +8,10 @@ import java.io.IOException
 
 class ApiSignInterceptor : Interceptor {
 
-    private val API_KEY: String = "apikey"
+    companion object {
+        const val API_KEY = "apikey"
+    }
+
     private val API_SIGN: String = "apisign"
 
     @Throws(IOException::class)

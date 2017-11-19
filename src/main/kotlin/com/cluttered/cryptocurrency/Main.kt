@@ -64,10 +64,10 @@ object Main {
 //                .map { GSON.toJson(it) }
 //                .subscribe { println(it) }
 
-        bittrexClient.getBalances()
+        bittrexClient.getBalance("BTC")
                 .map { it.result }
-                .flatMap { Observable.fromIterable(it) }
-                .filter { it.balance + it.pending > 0 }
+//                .flatMap { Observable.fromIterable(it) }
+//                .filter { it.balance + it.pending > 0 }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
     }
