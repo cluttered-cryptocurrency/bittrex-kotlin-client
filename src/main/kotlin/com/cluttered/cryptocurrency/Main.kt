@@ -63,11 +63,20 @@ object Main {
 //                .flatMap { Observable.fromIterable(it) }
 //                .map { GSON.toJson(it) }
 //                .subscribe { println(it) }
-
-        bittrexClient.getBalance("BTC")
-                .map { it.result }
+//
+//        bittrexClient.getBalances()
+//                .map { it.result }
 //                .flatMap { Observable.fromIterable(it) }
-//                .filter { it.balance + it.pending > 0 }
+//                .map { GSON.toJson(it) }
+//                .subscribe { println(it) }
+//
+//        bittrexClient.getBalance("BTC")
+//                .map { it.result }
+//                .map { GSON.toJson(it) }
+//                .subscribe { println(it) }
+
+        bittrexClient.getDepositAddress("BTC")
+                .map { it.result }
                 .map { GSON.toJson(it) }
                 .subscribe { println(it) }
     }

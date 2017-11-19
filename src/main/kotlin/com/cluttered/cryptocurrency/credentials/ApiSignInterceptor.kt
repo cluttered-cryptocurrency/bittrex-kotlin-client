@@ -2,17 +2,16 @@ package com.cluttered.cryptocurrency.credentials
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
-import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 
 class ApiSignInterceptor : Interceptor {
 
     companion object {
-        const val API_KEY = "apikey"
-    }
+        private const val API_SIGN: String = "apisign"
 
-    private val API_SIGN: String = "apisign"
+        const val API_KEY: String = "apikey"
+    }
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -22,7 +21,7 @@ class ApiSignInterceptor : Interceptor {
         val currentMillis = System.currentTimeMillis()
         val modifiedUrl = url.toString() + "&nonce=" + currentMillis
         val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret!!)
-        val request: Request = chain.request().newBuilder()
+        val request = chain.request().newBuilder()
                 .url(modifiedUrl)
                 .addHeader(API_SIGN, signedUrl)
                 .build()

@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec
 
 object Cryptography {
 
-    private val HMAC_SHA512 = "HmacSHA512"
+    private const val HMAC_SHA512 = "HmacSHA512"
 
     @Throws(SignatureException::class, NoSuchAlgorithmException::class, InvalidKeyException::class)
     fun hmacSHA512(uri: String, secret: String): String {
@@ -17,6 +17,6 @@ object Cryptography {
         mac.init(secretKeySpec)
         return mac.doFinal(uri.toByteArray())
                 .map { String.format("%02X", it) }
-                .reduce { acc, s -> acc + s  }
+                .reduce { acc, str -> acc + str }
     }
 }
