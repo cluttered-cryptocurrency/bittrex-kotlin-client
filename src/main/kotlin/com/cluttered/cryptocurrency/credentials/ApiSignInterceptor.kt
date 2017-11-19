@@ -8,20 +8,21 @@ import java.io.IOException
 
 class ApiSignInterceptor : Interceptor {
 
+    private val API_KEY: String = "apikey"
+    private val API_SIGN: String = "apisign"
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val url: HttpUrl = chain.request().url()
-        val key: String? = url.queryParameter("apikey")
-        if (key != null) {
-            val currentMillis = System.currentTimeMillis()
-            val modifiedUrl = url.toString() + "&nonce=" + currentMillis
-            val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret!!)
-            val request: Request = chain.request().newBuilder()
-                    .url(modifiedUrl)
-                    .addHeader("apisign", signedUrl)
-                    .build()
-            return chain.proceed(request)
-        }
-        return chain.proceed(chain.request())
+        // Only sign if API_KEY is present
+        url.queryParameter(API_KEY) ?: return chain.proceed(chain.request())
+        val currentMillis = System.currentTimeMillis()
+        val modifiedUrl = url.toString() + "&nonce=" + currentMillis
+        val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret!!)
+        val request: Request = chain.request().newBuilder()
+                .url(modifiedUrl)
+                .addHeader(API_SIGN, signedUrl)
+                .build()
+        return chain.proceed(request)
     }
 }
