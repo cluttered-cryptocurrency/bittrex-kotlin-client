@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Query
 import java.security.KeyException
 import java.util.*
 
@@ -76,6 +77,15 @@ class BittrexClient(private val key: String? = null, private val secret: String?
     fun getDepositAddress(currency: String): Observable<ApiResponse<DepositAddress>> {
         credentialsPresent()
         return accountService.getDepositAddress(Credentials.key!!, currency)
+    }
+
+    fun withdraw(currency: String,
+                 quantity: Double,
+                 address: String,
+                 paymentid: String? = null)
+            : Observable<ApiResponse<Withdraw>> {
+        credentialsPresent()
+        return accountService.withdraw(Credentials.key!!, currency, quantity, address, paymentid)
     }
 
     @Throws(KeyException::class)
