@@ -88,6 +88,11 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         return accountService.withdraw(Credentials.key!!, currency, quantity, address, paymentid)
     }
 
+    fun getOrder(uuid: UUID): Observable<ApiResponse<Order>> {
+        credentialsPresent()
+        return accountService.getOrder(Credentials.key!!, uuid)
+    }
+
     @Throws(KeyException::class)
     private fun credentialsPresent() {
         if (Credentials.key == null || Credentials.secret == null)

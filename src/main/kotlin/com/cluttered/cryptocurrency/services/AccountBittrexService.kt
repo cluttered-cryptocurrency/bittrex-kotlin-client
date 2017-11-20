@@ -5,6 +5,7 @@ import com.cluttered.cryptocurrency.models.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.*
 
 
 interface AccountBittrexService {
@@ -33,4 +34,7 @@ interface AccountBittrexService {
                  @Query("address") address: String,
                  @Query("paymentid") paymentid: String?)
             : Observable<ApiResponse<Withdraw>>
+
+    @GET(V1_1_ACCOUNT + "getorder")
+    fun getOrder(@Query(API_KEY) key: String, @Query("uuid") uuid: UUID): Observable<ApiResponse<Order>>
 }
