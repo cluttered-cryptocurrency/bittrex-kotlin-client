@@ -16,8 +16,11 @@ class ApiSignInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val url: HttpUrl = chain.request().url()
-        // Only sign if API_KEY is present
-        url.queryParameter(API_KEY) ?: return chain.proceed(chain.request())
+
+        // Ignore if API_KEY is absent
+        url.queryParameter(API_KEY) ?:
+                return chain.proceed(chain.request())
+
         val currentMillis = System.currentTimeMillis()
         val modifiedUrl = url.toString() + "&nonce=" + currentMillis
         val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret!!)
