@@ -5,7 +5,8 @@ import com.cluttered.cryptocurrency.credentials.Credentials
 import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.models.Currency
 import com.cluttered.cryptocurrency.serializers.DateDeserializer
-import com.cluttered.cryptocurrency.services.*
+import com.cluttered.cryptocurrency.services.AccountBittrexService
+import com.cluttered.cryptocurrency.services.PublicBittrexService
 import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
@@ -13,7 +14,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Query
 import java.security.KeyException
 import java.util.*
 
@@ -91,6 +91,11 @@ class BittrexClient(private val key: String? = null, private val secret: String?
     fun getOrder(uuid: UUID): Observable<ApiResponse<Order>> {
         credentialsPresent()
         return accountService.getOrder(Credentials.key!!, uuid)
+    }
+
+    fun getOrderHistory(): Observable<ApiResponse<OrderHistory>> {
+        credentialsPresent()
+        return accountService.getOrderhistory(Credentials.key!!)
     }
 
     @Throws(KeyException::class)
