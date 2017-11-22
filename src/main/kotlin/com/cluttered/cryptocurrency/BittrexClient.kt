@@ -79,10 +79,7 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         return accountService.getDepositAddress(Credentials.key!!, currency)
     }
 
-    fun withdraw(currency: String,
-                 quantity: Double,
-                 address: String,
-                 paymentid: String? = null)
+    fun withdraw(currency: String, quantity: Double, address: String, paymentid: String? = null)
             : Observable<ApiResponse<Withdraw>> {
         credentialsPresent()
         return accountService.withdraw(Credentials.key!!, currency, quantity, address, paymentid)
