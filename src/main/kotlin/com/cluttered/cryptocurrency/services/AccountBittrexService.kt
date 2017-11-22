@@ -40,4 +40,12 @@ interface AccountBittrexService {
 
     @GET(V1_1_ACCOUNT + "getorderhistory")
     fun getOrderhistory(@Query(API_KEY) key: String): Observable<ApiResponse<OrderHistory>>
+
+    @GET(V1_1_ACCOUNT + "getwithdrawalhistory")
+    fun getWithdrawalHistory(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)
+            : Observable<ApiResponse<WithdrawalHistory>>
+
+    @GET(V1_1_ACCOUNT + "getdeposithistory")
+    fun getDepositHistory(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)
+            : Observable<ApiResponse<WithdrawalHistory>>
 }

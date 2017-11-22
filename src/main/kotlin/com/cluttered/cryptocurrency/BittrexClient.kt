@@ -98,6 +98,16 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         return accountService.getOrderhistory(Credentials.key!!)
     }
 
+    fun getWithdrawalHistory(currency: String): Observable<ApiResponse<WithdrawalHistory>> {
+        credentialsPresent()
+        return accountService.getWithdrawalHistory(Credentials.key!!, currency)
+    }
+
+    fun getDeposithistory(currency: String): Observable<ApiResponse<WithdrawalHistory>> {
+        credentialsPresent()
+        return accountService.getDepositHistory(Credentials.key!!, currency)
+    }
+
     @Throws(KeyException::class)
     private fun credentialsPresent() {
         if (Credentials.key == null || Credentials.secret == null)
