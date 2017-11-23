@@ -6,6 +6,7 @@ import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.models.Currency
 import com.cluttered.cryptocurrency.serializers.DateDeserializer
 import com.cluttered.cryptocurrency.services.AccountBittrexService
+import com.cluttered.cryptocurrency.services.MarketBittrexService
 import com.cluttered.cryptocurrency.services.PublicBittrexService
 import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.GsonBuilder
@@ -23,6 +24,7 @@ class BittrexClient(private val key: String? = null, private val secret: String?
 
     private val publicService: PublicBittrexService
     private val accountService: AccountBittrexService
+    private val marketService: MarketBittrexService
 
     init {
         Credentials.key = this.key
@@ -45,6 +47,7 @@ class BittrexClient(private val key: String? = null, private val secret: String?
 
         publicService = retrofit.create(PublicBittrexService::class.java)
         accountService = retrofit.create(AccountBittrexService::class.java)
+        marketService = retrofit.create(MarketBittrexService::class.java)
     }
 
     fun getMarkets(): Observable<ApiListResponse<Market>> = publicService.getMarkets()
@@ -80,7 +83,7 @@ class BittrexClient(private val key: String? = null, private val secret: String?
     }
 
     fun withdraw(currency: String, quantity: Double, address: String, paymentid: String? = null)
-            : Observable<ApiResponse<Withdraw>> {
+            : Observable<ApiResponse<UuidResponse>> {
         credentialsPresent()
         return accountService.withdraw(Credentials.key!!, currency, quantity, address, paymentid)
     }
@@ -103,6 +106,26 @@ class BittrexClient(private val key: String? = null, private val secret: String?
     fun getDeposithistory(currency: String): Observable<ApiResponse<WithdrawalHistory>> {
         credentialsPresent()
         return accountService.getDepositHistory(Credentials.key!!, currency)
+    }
+
+    fun buyLimit(market: String, quantity: Double, rate: Double): Observable<ApiResponse<UuidResponse>> {
+        credentialsPresent()
+        return marketService.buyLimit(Credentials.key!!, market, quantity, rate)
+    }
+
+    fun sellLimit(market: String, quantity: Double, rate: Double): Observable<ApiResponse<UuidResponse>> {
+        credentialsPresent()
+        return marketService.sellLimit(Credentials.key!!, market, quantity, rate)
+    }
+
+    fun cancel(uuid: UUID): Observable<ApiResponse<UuidResponse>> {
+        credentialsPresent()
+        return marketService.cancel(Credentials.key!!, uuid)
+    }
+
+    fun getOpenOrders(market: String): Observable<ApiListResponse<OpenOrder>> {
+        credentialsPresent()
+        return marketService.getOpenOrders(Credentials.key!!, market)
     }
 
     @Throws(KeyException::class)

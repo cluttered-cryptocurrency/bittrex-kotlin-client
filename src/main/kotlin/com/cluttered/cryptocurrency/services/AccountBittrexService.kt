@@ -13,39 +13,39 @@ interface AccountBittrexService {
     companion object {
         private const val CURRENCY: String = "currency"
 
-        const val V1_1_ACCOUNT: String = "v1.1/account/"
+        const val V1_1_ACCOUNT: String = "v1.1/account"
     }
 
-    @GET(V1_1_ACCOUNT + "getbalances")
+    @GET("$V1_1_ACCOUNT/getbalances")
     fun getBalances(@Query(API_KEY) key: String): Observable<ApiListResponse<Balance>>
 
-    @GET(V1_1_ACCOUNT + "getbalance")
+    @GET("$V1_1_ACCOUNT/getbalance")
     fun getBalance(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)
             : Observable<ApiResponse<Balance>>
 
-    @GET(V1_1_ACCOUNT + "getdepositaddress")
+    @GET("$V1_1_ACCOUNT/getdepositaddress")
     fun getDepositAddress(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)
             : Observable<ApiResponse<DepositAddress>>
 
-    @GET(V1_1_ACCOUNT + "withdraw")
+    @GET("$V1_1_ACCOUNT/withdraw")
     fun withdraw(@Query(API_KEY) key: String,
                  @Query(CURRENCY) currency: String,
                  @Query("quantity") quantity: Double,
                  @Query("address") address: String,
                  @Query("paymentid") paymentid: String?)
-            : Observable<ApiResponse<Withdraw>>
+            : Observable<ApiResponse<UuidResponse>>
 
-    @GET(V1_1_ACCOUNT + "getorder")
+    @GET("$V1_1_ACCOUNT/getorder")
     fun getOrder(@Query(API_KEY) key: String, @Query("uuid") uuid: UUID): Observable<ApiResponse<Order>>
 
-    @GET(V1_1_ACCOUNT + "getorderhistory")
+    @GET("$V1_1_ACCOUNT/getorderhistory")
     fun getOrderhistory(@Query(API_KEY) key: String): Observable<ApiResponse<OrderHistory>>
 
-    @GET(V1_1_ACCOUNT + "getwithdrawalhistory")
+    @GET("$V1_1_ACCOUNT/getwithdrawalhistory")
     fun getWithdrawalHistory(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)
             : Observable<ApiResponse<WithdrawalHistory>>
 
-    @GET(V1_1_ACCOUNT + "getdeposithistory")
+    @GET("$V1_1_ACCOUNT/getdeposithistory")
     fun getDepositHistory(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)
             : Observable<ApiResponse<WithdrawalHistory>>
 }
