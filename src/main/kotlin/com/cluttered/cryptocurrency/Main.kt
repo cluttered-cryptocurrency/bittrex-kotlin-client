@@ -2,7 +2,6 @@ package com.cluttered.cryptocurrency
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import io.reactivex.Observable
 
 object Main {
 

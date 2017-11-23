@@ -11,7 +11,7 @@ class AuthorizedBittrexClient(key: String, secret: String) : BittrexClient() {
 
     private val accountService: AccountBittrexService = retrofit.create(AccountBittrexService::class.java)
     private val marketService: MarketBittrexService = retrofit.create(MarketBittrexService::class.java)
-    
+
     init {
         Credentials.key = key
         Credentials.secret = secret

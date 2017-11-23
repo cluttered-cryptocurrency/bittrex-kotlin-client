@@ -20,12 +20,12 @@ interface MarketBittrexService {
 
     @GET("$V1_1_MARKET/buylimit")
     fun buyLimit(@Query(API_KEY) key: String, @Query(MARKET) market: String,
-                    @Query("quantity") quantity: Double, @Query("rate") rate: Double)
+                 @Query("quantity") quantity: Double, @Query("rate") rate: Double)
             : Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_1_MARKET/selllimit")
     fun sellLimit(@Query(API_KEY) key: String, @Query(MARKET) market: String,
-                 @Query("quantity") quantity: Double, @Query("rate") rate: Double)
+                  @Query("quantity") quantity: Double, @Query("rate") rate: Double)
             : Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_1_MARKET/cancel")
