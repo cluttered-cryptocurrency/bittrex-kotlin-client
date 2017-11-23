@@ -1,12 +1,9 @@
 package com.cluttered.cryptocurrency
 
 import com.cluttered.cryptocurrency.credentials.ApiSignInterceptor
-import com.cluttered.cryptocurrency.credentials.Credentials
 import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.models.Currency
 import com.cluttered.cryptocurrency.serializers.DateDeserializer
-import com.cluttered.cryptocurrency.services.AccountBittrexService
-import com.cluttered.cryptocurrency.services.MarketBittrexService
 import com.cluttered.cryptocurrency.services.PublicBittrexService
 import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.GsonBuilder
@@ -15,21 +12,19 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.KeyException
 import java.util.*
 
-class BittrexClient(private val key: String? = null, private val secret: String? = null) {
+open class BittrexClient {
 
-    private val BITTREX_API_URL: String = "https://bittrex.com/api/"
+    companion object {
+        const val BITTREX_API_URL: String = "https://bittrex.com/api/"
+    }
 
     private val publicService: PublicBittrexService
-    private val accountService: AccountBittrexService
-    private val marketService: MarketBittrexService
+
+    protected val retrofit: Retrofit
 
     init {
-        Credentials.key = this.key
-        Credentials.secret = this.secret
-
         val gson = GsonBuilder()
                 .setLenient()
                 .registerTypeAdapter(Date::class.java, DateDeserializer())
@@ -38,7 +33,7 @@ class BittrexClient(private val key: String? = null, private val secret: String?
         val okHttpClientBuilder = OkHttpClient.Builder()
                 .addNetworkInterceptor(ApiSignInterceptor())
 
-        val retrofit = Retrofit.Builder()
+        retrofit = Retrofit.Builder()
                 .baseUrl(BITTREX_API_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -46,8 +41,6 @@ class BittrexClient(private val key: String? = null, private val secret: String?
                 .build()
 
         publicService = retrofit.create(PublicBittrexService::class.java)
-        accountService = retrofit.create(AccountBittrexService::class.java)
-        marketService = retrofit.create(MarketBittrexService::class.java)
     }
 
     fun getMarkets(): Observable<ApiListResponse<Market>> = publicService.getMarkets()
@@ -66,71 +59,4 @@ class BittrexClient(private val key: String? = null, private val secret: String?
 
     fun getMarketHistory(market: String): Observable<ApiListResponse<Trade>> =
             publicService.getMarketHistory(market)
-
-    fun getBalances(): Observable<ApiListResponse<Balance>> {
-        credentialsPresent()
-        return accountService.getBalances(Credentials.key!!)
-    }
-
-    fun getBalance(currency: String): Observable<ApiResponse<Balance>> {
-        credentialsPresent()
-        return accountService.getBalance(Credentials.key!!, currency)
-    }
-
-    fun getDepositAddress(currency: String): Observable<ApiResponse<DepositAddress>> {
-        credentialsPresent()
-        return accountService.getDepositAddress(Credentials.key!!, currency)
-    }
-
-    fun withdraw(currency: String, quantity: Double, address: String, paymentid: String? = null)
-            : Observable<ApiResponse<UuidResponse>> {
-        credentialsPresent()
-        return accountService.withdraw(Credentials.key!!, currency, quantity, address, paymentid)
-    }
-
-    fun getOrder(uuid: UUID): Observable<ApiResponse<Order>> {
-        credentialsPresent()
-        return accountService.getOrder(Credentials.key!!, uuid)
-    }
-
-    fun getOrderHistory(): Observable<ApiResponse<OrderHistory>> {
-        credentialsPresent()
-        return accountService.getOrderhistory(Credentials.key!!)
-    }
-
-    fun getWithdrawalHistory(currency: String): Observable<ApiResponse<WithdrawalHistory>> {
-        credentialsPresent()
-        return accountService.getWithdrawalHistory(Credentials.key!!, currency)
-    }
-
-    fun getDeposithistory(currency: String): Observable<ApiResponse<WithdrawalHistory>> {
-        credentialsPresent()
-        return accountService.getDepositHistory(Credentials.key!!, currency)
-    }
-
-    fun buyLimit(market: String, quantity: Double, rate: Double): Observable<ApiResponse<UuidResponse>> {
-        credentialsPresent()
-        return marketService.buyLimit(Credentials.key!!, market, quantity, rate)
-    }
-
-    fun sellLimit(market: String, quantity: Double, rate: Double): Observable<ApiResponse<UuidResponse>> {
-        credentialsPresent()
-        return marketService.sellLimit(Credentials.key!!, market, quantity, rate)
-    }
-
-    fun cancel(uuid: UUID): Observable<ApiResponse<UuidResponse>> {
-        credentialsPresent()
-        return marketService.cancel(Credentials.key!!, uuid)
-    }
-
-    fun getOpenOrders(market: String): Observable<ApiListResponse<OpenOrder>> {
-        credentialsPresent()
-        return marketService.getOpenOrders(Credentials.key!!, market)
-    }
-
-    @Throws(KeyException::class)
-    private fun credentialsPresent() {
-        if (Credentials.key == null || Credentials.secret == null)
-            throw KeyException("missing 'key' or 'secret' credentials")
-    }
 }

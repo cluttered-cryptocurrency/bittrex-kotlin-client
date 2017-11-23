@@ -23,7 +23,7 @@ class ApiSignInterceptor : Interceptor {
 
         val currentMillis = System.currentTimeMillis()
         val modifiedUrl = url.toString() + "&nonce=" + currentMillis
-        val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret!!)
+        val signedUrl = Cryptography.hmacSHA512(modifiedUrl, Credentials.secret)
         val request = chain.request().newBuilder()
                 .url(modifiedUrl)
                 .addHeader(API_SIGN, signedUrl)

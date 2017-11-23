@@ -1,6 +1,6 @@
 package com.cluttered.cryptocurrency.credentials
 
 object Credentials {
-    var key: String? = null
-    var secret: String? = null
+    lateinit var key: String
+    lateinit var secret: String
 }

@@ -13,7 +13,7 @@ object Main {
             .setPrettyPrinting()
             .create()
 
-    private val bittrexClient: BittrexClient = BittrexClient(
+    private val bittrexClient: AuthorizedBittrexClient = AuthorizedBittrexClient(
             "4e8937a4496f409d83dd3c396d466182",
             "1b4c48c6901046c3aed00fdce1fdbcfe"
     )
