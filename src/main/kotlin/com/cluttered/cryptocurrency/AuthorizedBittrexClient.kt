@@ -17,7 +17,7 @@ class AuthorizedBittrexClient(key: String, secret: String) : BittrexClient() {
         Credentials.secret = secret
     }
 
-    fun getBalances(): Observable<ApiListResponse<Balance>> = accountService.getBalances(Credentials.key)
+    fun getBalances(): Observable<ApiResponse<List<Balance>>> = accountService.getBalances(Credentials.key)
 
     fun getBalance(currency: String): Observable<ApiResponse<Balance>> =
             accountService.getBalance(Credentials.key, currency)
@@ -47,6 +47,6 @@ class AuthorizedBittrexClient(key: String, secret: String) : BittrexClient() {
 
     fun cancel(uuid: UUID): Observable<ApiResponse<UuidResponse>> = marketService.cancel(Credentials.key, uuid)
 
-    fun getOpenOrders(market: String): Observable<ApiListResponse<OpenOrder>> =
+    fun getOpenOrders(market: String): Observable<ApiResponse<List<OpenOrder>>> =
             marketService.getOpenOrders(Credentials.key, market)
 }

@@ -13,23 +13,23 @@ interface PublicBittrexService {
     }
 
     @GET("$V1_1_PUBLIC/getmarkets")
-    fun getMarkets(): Observable<ApiListResponse<Market>>
+    fun getMarkets(): Observable<ApiResponse<List<Market>>>
 
     @GET("$V1_1_PUBLIC/getcurrencies")
-    fun getCurrencies(): Observable<ApiListResponse<Currency>>
+    fun getCurrencies(): Observable<ApiResponse<List<Currency>>>
 
     @GET("$V1_1_PUBLIC/getticker")
     fun getTicker(@Query("market") market: String): Observable<ApiResponse<Ticker>>
 
     @GET("$V1_1_PUBLIC/getmarketsummaries")
-    fun getMarketSummaries(): Observable<ApiListResponse<MarketSummary>>
+    fun getMarketSummaries(): Observable<ApiResponse<List<MarketSummary>>>
 
     @GET("$V1_1_PUBLIC/getmarketsummary")
-    fun getMarketSummary(@Query("market") market: String): Observable<ApiListResponse<MarketSummary>>
+    fun getMarketSummary(@Query("market") market: String): Observable<ApiResponse<List<MarketSummary>>>
 
     @GET("$V1_1_PUBLIC/getorderbook")
     fun getOrderBook(@Query("market") market: String, @Query("type") type: OrderType): Observable<ApiResponse<OrdersByType>>
 
     @GET("$V1_1_PUBLIC/getmarkethistory")
-    fun getMarketHistory(@Query("market") market: String): Observable<ApiListResponse<Trade>>
+    fun getMarketHistory(@Query("market") market: String): Observable<ApiResponse<List<Trade>>>
 }

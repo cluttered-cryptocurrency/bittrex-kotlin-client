@@ -17,7 +17,7 @@ interface AccountBittrexService {
     }
 
     @GET("$V1_1_ACCOUNT/getbalances")
-    fun getBalances(@Query(API_KEY) key: String): Observable<ApiListResponse<Balance>>
+    fun getBalances(@Query(API_KEY) key: String): Observable<ApiResponse<List<Balance>>>
 
     @GET("$V1_1_ACCOUNT/getbalance")
     fun getBalance(@Query(API_KEY) key: String, @Query(CURRENCY) currency: String)

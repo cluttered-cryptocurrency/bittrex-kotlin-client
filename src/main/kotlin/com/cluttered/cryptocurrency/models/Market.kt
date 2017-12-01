@@ -1,7 +1,7 @@
 package com.cluttered.cryptocurrency.models
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.time.ZonedDateTime
 
 data class Market(
         @SerializedName("MarketCurrency") val marketCurrency: String,
@@ -16,7 +16,7 @@ data class Market(
 
         @SerializedName("IsActive") val isActive: Boolean,
 
-        @SerializedName("Created") val created: Date,
+        @SerializedName("Created") val created: ZonedDateTime,
 
         @SerializedName("LogoUrl") val logoUrl: String? = null
 )

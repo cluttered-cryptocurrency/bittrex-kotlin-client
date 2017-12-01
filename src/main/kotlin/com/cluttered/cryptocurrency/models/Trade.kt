@@ -3,7 +3,7 @@ package com.cluttered.cryptocurrency.models
 import com.cluttered.cryptocurrency.types.FillType
 import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.time.ZonedDateTime
 
 data class Trade(
         @SerializedName("Id") val id: Long,
@@ -12,5 +12,5 @@ data class Trade(
         @SerializedName("Total") val total: Double,
         @SerializedName("FillType") val fillType: FillType,
         @SerializedName("OrderType") val orderType: OrderType,
-        @SerializedName("TimeStamp") val timestamp: Date
+        @SerializedName("TimeStamp") val timestamp: ZonedDateTime
 )

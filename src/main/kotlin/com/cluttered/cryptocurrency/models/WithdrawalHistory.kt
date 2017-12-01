@@ -1,6 +1,7 @@
 package com.cluttered.cryptocurrency.models
 
 import com.google.gson.annotations.SerializedName
+import java.time.ZonedDateTime
 import java.util.*
 
 data class WithdrawalHistory(
@@ -8,7 +9,7 @@ data class WithdrawalHistory(
         @SerializedName("Currency") val currency: String,
         @SerializedName("Amount") val amount: Double,
         @SerializedName("Address") val address: String,
-        @SerializedName("Opened") val opened: Date,
+        @SerializedName("Opened") val opened: ZonedDateTime,
         @SerializedName("Authorized") val authorized: Boolean,
         @SerializedName("PendingPayment") val pendingPayment: Boolean,
         @SerializedName("TxCost") val txCost: Double,

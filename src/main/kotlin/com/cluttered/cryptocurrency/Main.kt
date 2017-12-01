@@ -1,13 +1,16 @@
 package com.cluttered.cryptocurrency
 
+import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeMarshaller
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import io.reactivex.Observable
+import java.time.ZonedDateTime
 
 object Main {
 
     private val GSON: Gson = GsonBuilder()
             .setLenient()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            .registerTypeAdapter(ZonedDateTime::class.java, ZonedDateTimeMarshaller())
             .serializeNulls()
             .setPrettyPrinting()
             .create()
@@ -46,11 +49,11 @@ object Main {
 //                .map { GSON.toJson(it) }
 //                .subscribe { println(it) }
 //
-//        bittrexClient.getMarketSummary("BTC-ETH")
-//                .map { it.result }
-//                .flatMap { Observable.fromIterable(it) }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
+        bittrexClient.getMarketSummary("BTC-ETH")
+                .map { it.result }
+                .flatMap { Observable.fromIterable(it) }
+                .map { GSON.toJson(it) }
+                .subscribe { println(it) }
 //
 //        bittrexClient.getOrderBook("BTC-ETH", OrderType.BOTH)
 //                .map { it.result }
@@ -74,9 +77,9 @@ object Main {
 //                .map { GSON.toJson(it) }
 //                .subscribe { println(it) }
 
-        bittrexClient.getDepositAddress("BTC")
-                .map { it.result }
-                .map { GSON.toJson(it) }
-                .subscribe { println(it) }
+//        bittrexClient.getDepositAddress("BTC")
+//                .map { it.result }
+//                .map { GSON.toJson(it) }
+//                .subscribe { println(it) }
     }
 }

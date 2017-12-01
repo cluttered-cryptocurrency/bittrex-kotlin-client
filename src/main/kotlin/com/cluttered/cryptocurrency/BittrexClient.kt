@@ -3,7 +3,7 @@ package com.cluttered.cryptocurrency
 import com.cluttered.cryptocurrency.credentials.ApiSignInterceptor
 import com.cluttered.cryptocurrency.models.*
 import com.cluttered.cryptocurrency.models.Currency
-import com.cluttered.cryptocurrency.serializers.DateDeserializer
+import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeMarshaller
 import com.cluttered.cryptocurrency.services.PublicBittrexService
 import com.cluttered.cryptocurrency.types.OrderType
 import com.google.gson.GsonBuilder
@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
+import java.time.ZonedDateTime
 
 open class BittrexClient {
 
@@ -27,7 +27,7 @@ open class BittrexClient {
     init {
         val gson = GsonBuilder()
                 .setLenient()
-                .registerTypeAdapter(Date::class.java, DateDeserializer())
+                .registerTypeAdapter(ZonedDateTime::class.java, ZonedDateTimeMarshaller())
                 .create()
 
         val okHttpClientBuilder = OkHttpClient.Builder()
@@ -43,20 +43,20 @@ open class BittrexClient {
         publicService = retrofit.create(PublicBittrexService::class.java)
     }
 
-    fun getMarkets(): Observable<ApiListResponse<Market>> = publicService.getMarkets()
+    fun getMarkets(): Observable<ApiResponse<List<Market>>> = publicService.getMarkets()
 
-    fun getCurrencies(): Observable<ApiListResponse<Currency>> = publicService.getCurrencies()
+    fun getCurrencies(): Observable<ApiResponse<List<Currency>>> = publicService.getCurrencies()
 
     fun getTicker(market: String): Observable<ApiResponse<Ticker>> = publicService.getTicker(market)
 
-    fun getMarketSummaries(): Observable<ApiListResponse<MarketSummary>> = publicService.getMarketSummaries()
+    fun getMarketSummaries(): Observable<ApiResponse<List<MarketSummary>>> = publicService.getMarketSummaries()
 
-    fun getMarketSummary(market: String): Observable<ApiListResponse<MarketSummary>> =
+    fun getMarketSummary(market: String): Observable<ApiResponse<List<MarketSummary>>> =
             publicService.getMarketSummary(market)
 
     fun getOrderBook(market: String, type: OrderType): Observable<ApiResponse<OrdersByType>> =
             publicService.getOrderBook(market, type)
 
-    fun getMarketHistory(market: String): Observable<ApiListResponse<Trade>> =
+    fun getMarketHistory(market: String): Observable<ApiResponse<List<Trade>>> =
             publicService.getMarketHistory(market)
 }

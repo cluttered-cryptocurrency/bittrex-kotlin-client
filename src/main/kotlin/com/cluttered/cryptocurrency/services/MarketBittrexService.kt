@@ -1,7 +1,6 @@
 package com.cluttered.cryptocurrency.services
 
 import com.cluttered.cryptocurrency.credentials.ApiSignInterceptor.Companion.API_KEY
-import com.cluttered.cryptocurrency.models.ApiListResponse
 import com.cluttered.cryptocurrency.models.ApiResponse
 import com.cluttered.cryptocurrency.models.OpenOrder
 import com.cluttered.cryptocurrency.models.UuidResponse
@@ -33,5 +32,5 @@ interface MarketBittrexService {
 
     @GET("$V1_1_MARKET/getopenorders")
     fun getOpenOrders(@Query(API_KEY) key: String, @Query(MARKET) market: String)
-            : Observable<ApiListResponse<OpenOrder>>
+            : Observable<ApiResponse<List<OpenOrder>>>
 }
