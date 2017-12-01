@@ -4,7 +4,7 @@ import donky.microsoft.aspnet.signalr.client.LogLevel
 import donky.microsoft.aspnet.signalr.client.Logger
 import org.slf4j.LoggerFactory
 
-class Slf4jLogger : Logger {
+class SignalrSlf4jLogger : Logger {
 
     companion object {
         private val LOG: org.slf4j.Logger = LoggerFactory.getLogger("donkey.mircrosoft.aspnet.signalr")
