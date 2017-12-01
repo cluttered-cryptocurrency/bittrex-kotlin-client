@@ -15,8 +15,10 @@ apply plugin: 'kotlin'
 ext {
     _gradle_version = '4.3.1'
 
+    signalr_version = '2.7.0.3'
     retrofit_version = '2.3.0'
     rxkotlin_version = '2.1.0'
+    slf4j_version = '1.7.25'
 
     junit_version = '4.12'
 }
@@ -24,14 +26,18 @@ ext {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url "https://clojars.org/repo" }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+    compile "org.slf4j:slf4j-api:$slf4j_version"
 
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    compile "net.donky:donky-signalr:$signalr_version"
 
     compile "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 }
