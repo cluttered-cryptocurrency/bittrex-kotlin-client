@@ -2,6 +2,7 @@ package com.cluttered.cryptocurrency.services
 
 import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeMarshaller
 import com.cluttered.cryptocurrency.model.ApiResponse
+import com.cluttered.cryptocurrency.model.Currency
 import com.cluttered.cryptocurrency.model.Market
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
@@ -38,4 +39,7 @@ interface PublicBittrexService {
 
     @GET("$V1_PUBLIC/getmarkets")
     fun getMarkets(): Observable<ApiResponse<List<Market>>>
+
+    @GET("$V1_PUBLIC/getcurrencies")
+    fun getCurrencies(): Observable<ApiResponse<List<Currency>>>
 }
