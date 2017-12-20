@@ -1,85 +1,20 @@
 package com.cluttered.cryptocurrency
 
-import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeMarshaller
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.cluttered.cryptocurrency.services.PublicBittrexService
 import io.reactivex.Observable
-import java.time.ZonedDateTime
 
 object Main {
 
-    private val GSON: Gson = GsonBuilder()
-            .setLenient()
-            .registerTypeAdapter(ZonedDateTime::class.java, ZonedDateTimeMarshaller())
-            .serializeNulls()
-            .setPrettyPrinting()
-            .create()
-
-    private val bittrexClient: AuthorizedBittrexClient = AuthorizedBittrexClient(
-            "4e8937a4496f409d83dd3c396d466182",
-            "1b4c48c6901046c3aed00fdce1fdbcfe"
-    )
+    private val publicBittrexService by lazy {
+        PublicBittrexService.create()
+    }
 
     @JvmStatic
     fun main(args: Array<String>) {
-
-//        bittrexClient.getMarkets()
-//                .map { it.result }
-//                .flatMap { Observable.fromIterable(it) }
-//                .filter { it.marketName == "BTC-ETH" }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-//        bittrexClient.getCurrencies()
-//                .map { it.result }
-//                .flatMap { Observable.fromIterable(it) }
-//                .filter { it.currency == "ETH" }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-//        bittrexClient.getTicker("BTC-ETH")
-//                .map { it.result }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-//        bittrexClient.getMarketSummaries()
-//                .map { it.result }
-//                .flatMap { Observable.fromIterable(it) }
-//                .filter { it.marketName == "BTC-ETH" }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-        bittrexClient.getMarketSummary("BTC-ETH")
+        publicBittrexService.getMarkets()
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
-                .map { GSON.toJson(it) }
-                .subscribe { println(it) }
-//
-//        bittrexClient.getOrderBook("BTC-ETH", OrderType.BOTH)
-//                .map { it.result }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-//        bittrexClient.getMarketHistory("BTC-ETH")
-//                .map { it.result }
-//                .flatMap { Observable.fromIterable(it) }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-//        bittrexClient.getBalances()
-//                .map { it.result }
-//                .flatMap { Observable.fromIterable(it) }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-//
-//        bittrexClient.getBalance("BTC")
-//                .map { it.result }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
-
-//        bittrexClient.getDepositAddress("BTC")
-//                .map { it.result }
-//                .map { GSON.toJson(it) }
-//                .subscribe { println(it) }
+                .filter { it.marketName == "BTC-ETH" }
+                .subscribe { println(it.marketName) }
     }
 }

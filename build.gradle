@@ -40,6 +40,8 @@ dependencies {
     compile "net.donky:donky-signalr:$signalr_version"
 
     compile "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+
+    testCompile "junit:junit:$junit_version"
 }
 
 compileKotlin {

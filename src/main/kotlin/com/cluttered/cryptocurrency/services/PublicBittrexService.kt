@@ -1,35 +1,32 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.models.*
-import com.cluttered.cryptocurrency.types.OrderType
+import com.cluttered.cryptocurrency.model.ApiResponse
+import com.cluttered.cryptocurrency.model.Market
 import io.reactivex.Observable
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface PublicBittrexService {
 
     companion object {
-        const val V1_1_PUBLIC: String = "v1.1/public"
+        const val V1_PUBLIC: String = "v1.1/public"
+
+        fun create(): PublicBittrexService {
+            val retrofit = Retrofit.Builder()
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("https://bittrex.com/api/")
+                    .build()
+            return create(retrofit)
+        }
+
+        fun create(retrofit: Retrofit): PublicBittrexService {
+            return retrofit.create(PublicBittrexService::class.java)
+        }
     }
 
-    @GET("$V1_1_PUBLIC/getmarkets")
+    @GET("$V1_PUBLIC/getmarkets")
     fun getMarkets(): Observable<ApiResponse<List<Market>>>
-
-    @GET("$V1_1_PUBLIC/getcurrencies")
-    fun getCurrencies(): Observable<ApiResponse<List<Currency>>>
-
-    @GET("$V1_1_PUBLIC/getticker")
-    fun getTicker(@Query("market") market: String): Observable<ApiResponse<Ticker>>
-
-    @GET("$V1_1_PUBLIC/getmarketsummaries")
-    fun getMarketSummaries(): Observable<ApiResponse<List<MarketSummary>>>
-
-    @GET("$V1_1_PUBLIC/getmarketsummary")
-    fun getMarketSummary(@Query("market") market: String): Observable<ApiResponse<List<MarketSummary>>>
-
-    @GET("$V1_1_PUBLIC/getorderbook")
-    fun getOrderBook(@Query("market") market: String, @Query("type") type: OrderType): Observable<ApiResponse<OrdersByType>>
-
-    @GET("$V1_1_PUBLIC/getmarkethistory")
-    fun getMarketHistory(@Query("market") market: String): Observable<ApiResponse<List<Trade>>>
 }
