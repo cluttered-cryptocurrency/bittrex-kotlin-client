@@ -2,4 +2,4 @@ codecov:
   branch: master
 
 ignore:
-  - "src/main/cluttered/cryptocurrency/model"
+  - "src/main/kotlin/com/cluttered/cryptocurrency/model"
