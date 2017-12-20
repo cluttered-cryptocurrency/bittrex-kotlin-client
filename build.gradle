@@ -13,10 +13,11 @@ version '0.1.0'
 ext {
     _gradle_version = '4.3.1'
 
+    slf4j_version = '1.7.25'
+
     signalr_version = '2.7.0.3'
     retrofit_version = '2.3.0'
     rxkotlin_version = '2.1.0'
-    slf4j_version = '1.7.25'
 
     junit_version = '4.12'
     assertj_version = '3.8.0'

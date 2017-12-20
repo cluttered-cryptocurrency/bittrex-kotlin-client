@@ -14,14 +14,18 @@ class BittrexClientTest {
 
 
     @Test
-    fun testTrue() {
+    fun testBtcEthMarket() {
         val expectedMarketName = "BTC-ETH"
         var result = ""
         publicBittrexService.getMarkets()
+                .filter { it.success }
                 .map { it.result }
                 .flatMap { Observable.fromIterable(it) }
                 .filter { it.marketName == expectedMarketName }
-                .subscribe { result = it.marketName}
+                .subscribe {
+                    result = it.marketName
+                    println(it)
+                }
 
         assertThat(result).isEqualTo(expectedMarketName)
     }
