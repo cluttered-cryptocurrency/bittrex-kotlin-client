@@ -17,9 +17,9 @@ class PublicBittrexServiceTest {
         var result = ""
         publicBittrexService.getMarkets()
                 .filter { it.success }
-                .map { it.result }
-                .flatMap { Observable.fromIterable(it) }
+                .flatMap { Observable.fromIterable(it.result) }
                 .filter { it.marketName == expectedMarketName }
+                .firstElement()
                 .subscribe {
                     result = it.marketName
                     println(it)
@@ -34,9 +34,9 @@ class PublicBittrexServiceTest {
         var result = ""
         publicBittrexService.getCurrencies()
                 .filter { it.success }
-                .map { it.result }
-                .flatMap { Observable.fromIterable(it) }
+                .flatMap { Observable.fromIterable(it.result) }
                 .filter { it.currency == expectedCurrency }
+                .firstElement()
                 .subscribe {
                     result = it.currency
                     println(it)
@@ -68,9 +68,25 @@ class PublicBittrexServiceTest {
         var result = ""
         publicBittrexService.getMarketSummaries()
                 .filter { it.success }
-                .map { it.result }
-                .flatMap { Observable.fromIterable(it) }
+                .flatMap { Observable.fromIterable(it.result) }
                 .filter { it.marketName == expectedMarketName }
+                .firstElement()
+                .subscribe {
+                    result = it.marketName
+                    println(it)
+                }
+
+        assertThat(result).isEqualTo(expectedMarketName)
+    }
+
+    @Test
+    fun testMarketSummary() {
+        val expectedMarketName = "BTC-WAVES"
+        var result = ""
+        publicBittrexService.getMarketSummary(expectedMarketName)
+                .filter { it.success }
+                .flatMap { Observable.fromIterable(it.result) }
+                .firstElement()
                 .subscribe {
                     result = it.marketName
                     println(it)

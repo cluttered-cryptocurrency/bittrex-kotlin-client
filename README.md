@@ -17,9 +17,7 @@ object Main {
     fun main(args: Array<String>) {
         publicBittrexService.getMarkets()
                 .filter { it.success }
-                .map { it.result }
-                .flatMap { Observable.fromIterable(it) }
-                .filter { it.marketName == "BTC-ETH" }
+                .flatMap { Observable.fromIterable(it.result) }
                 .subscribe { println(it.marketName) }
     }
 }
