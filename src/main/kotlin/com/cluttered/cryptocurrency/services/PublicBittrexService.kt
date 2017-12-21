@@ -60,4 +60,7 @@ interface PublicBittrexService {
 
     @GET("$V1_PUBLIC/getorderbook?type=sell")
     fun getSellOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<List<Order>>>
+
+    @GET("$V1_PUBLIC/getmarkethistory")
+    fun getMarketHistory(@Query(MARKET) market: String): Observable<ApiResponse<List<MarketHistory>>>
 }

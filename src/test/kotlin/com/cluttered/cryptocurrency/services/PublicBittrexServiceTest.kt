@@ -1,7 +1,6 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.model.OrderLists
-import com.cluttered.cryptocurrency.model.Ticker
+import com.cluttered.cryptocurrency.model.*
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -15,35 +14,35 @@ class PublicBittrexServiceTest {
     @Test
     fun testBtcEthMarket() {
         val expectedMarketName = "BTC-ETH"
-        var result = ""
+        var result: Market? = null
         publicBittrexService.getMarkets()
                 .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
                 .filter { it.marketName == expectedMarketName }
                 .firstElement()
                 .subscribe {
-                    result = it.marketName
+                    result = it
                     println(it)
                 }
 
-        assertThat(result).isEqualTo(expectedMarketName)
+        assertThat(result).isNotNull()
     }
 
     @Test
     fun testLtcCurrency() {
         val expectedCurrency = "LTC"
-        var result = ""
+        var result: Currency? = null
         publicBittrexService.getCurrencies()
                 .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
                 .filter { it.currency == expectedCurrency }
                 .firstElement()
                 .subscribe {
-                    result = it.currency
+                    result = it
                     println(it)
                 }
 
-        assertThat(result).isEqualTo(expectedCurrency)
+        assertThat(result).isNotNull()
     }
 
     @Test
@@ -66,34 +65,34 @@ class PublicBittrexServiceTest {
     @Test
     fun testMarketSummaries() {
         val expectedMarketName = "BTC-ETH"
-        var result = ""
+        var result: MarketSummary? = null
         publicBittrexService.getMarketSummaries()
                 .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
                 .filter { it.marketName == expectedMarketName }
                 .firstElement()
                 .subscribe {
-                    result = it.marketName
+                    result = it
                     println(it)
                 }
 
-        assertThat(result).isEqualTo(expectedMarketName)
+        assertThat(result).isNotNull()
     }
 
     @Test
     fun testMarketSummary() {
         val expectedMarketName = "BTC-WAVES"
-        var result = ""
+        var result: MarketSummary? = null
         publicBittrexService.getMarketSummary(expectedMarketName)
                 .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
                 .firstElement()
                 .subscribe {
-                    result = it.marketName
+                    result = it
                     println(it)
                 }
 
-        assertThat(result).isEqualTo(expectedMarketName)
+        assertThat(result).isNotNull()
     }
 
     @Test
@@ -135,5 +134,22 @@ class PublicBittrexServiceTest {
                 .subscribe { count = it.size }
 
         assertThat(count).isGreaterThan(-1)
+    }
+
+    @Test
+    fun testMarketHistory() {
+        val expectedMarketName = "BTC-WAVES"
+        var result: MarketHistory? = null
+        publicBittrexService.getMarketHistory(expectedMarketName)
+                .filter { it.success }
+                .flatMap { Observable.fromIterable(it.result) }
+                .filter { it.orderType == MarketHistory.OrderType.BUY }
+                .firstElement()
+                .subscribe {
+                    result = it
+                    println(it)
+                }
+
+        assertThat(result).isNotNull()
     }
 }
