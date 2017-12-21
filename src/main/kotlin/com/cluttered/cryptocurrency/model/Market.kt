@@ -17,5 +17,5 @@ data class Market(
         @SerializedName("Notice") val notice: String?,
         @SerializedName("IsSponsored") val isSponsored: Boolean,
         @SerializedName("Created") val created: ZonedDateTime,
-        @SerializedName("LogoUrl") val logoUrl: String?
+        @SerializedName("LogoUrl") val logoUrl: String
 )
