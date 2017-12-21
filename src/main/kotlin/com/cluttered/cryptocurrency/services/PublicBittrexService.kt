@@ -13,14 +13,6 @@ import java.time.ZonedDateTime
 
 interface PublicBittrexService {
 
-    enum class OrderType {
-        BUY,
-        SELL,
-        BOTH;
-
-        override fun toString(): String = super.toString().toLowerCase()
-    }
-
     companion object {
         const val V1_PUBLIC: String = "v1.1/public"
         const val MARKET: String = "market"
@@ -60,12 +52,12 @@ interface PublicBittrexService {
     @GET("$V1_PUBLIC/getmarketsummary")
     fun getMarketSummary(@Query(MARKET) market: String): Observable<ApiResponse<List<MarketSummary>>>
 
-    @GET("$V1_PUBLIC/getorderbook")
-    fun getBothOrderBook(@Query(MARKET) market: String, @Query("type") type: OrderType = OrderType.BOTH): Observable<ApiResponse<OrderLists>>
+    @GET("$V1_PUBLIC/getorderbook?type=both")
+    fun getBothOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<OrderLists>>
 
-    @GET("$V1_PUBLIC/getorderbook")
-    fun getBuyOrderBook(@Query(MARKET) market: String, @Query("type") type: OrderType = OrderType.BUY): Observable<ApiResponse<List<Order>>>
+    @GET("$V1_PUBLIC/getorderbook?type=buy")
+    fun getBuyOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<List<Order>>>
 
-    @GET("$V1_PUBLIC/getorderbook")
-    fun getSellOrderBook(@Query(MARKET) market: String, @Query("type") type: OrderType = OrderType.SELL): Observable<ApiResponse<List<Order>>>
+    @GET("$V1_PUBLIC/getorderbook?type=sell")
+    fun getSellOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<List<Order>>>
 }
