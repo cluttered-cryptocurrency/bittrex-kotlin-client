@@ -96,12 +96,12 @@ class PublicBittrexServiceTest {
     }
 
     @Test
-    fun testBothOrderLists() {
+    fun testOrderLists() {
         val marketName = "BTC-ARDR"
         var buyCount = -1
         var sellCount = -1
         val orderListsObservable = publicBittrexService
-                .getBothOrderBook(marketName)
+                .getOrderBook(marketName)
                 .filter { it.success }
                 .map { it.result }
 
