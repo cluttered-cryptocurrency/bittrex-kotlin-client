@@ -1,5 +1,6 @@
 package com.cluttered.cryptocurrency.services
 
+import com.cluttered.cryptocurrency.model.Ticker
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -28,7 +29,7 @@ class PublicBittrexServiceTest {
     }
 
     @Test
-    fun test() {
+    fun testLtcCurrency() {
         val expectedCurrency = "LTC"
         var result = ""
         publicBittrexService.getCurrencies()
@@ -44,4 +45,19 @@ class PublicBittrexServiceTest {
         assertThat(result).isEqualTo(expectedCurrency)
     }
 
+    @Test
+    fun testArdrTicker() {
+        val market = "BTC-ARDR"
+        var result = Ticker(0.0,0.0,0.0)
+        publicBittrexService.getTicker(market)
+                .filter { it.success }
+                .map { it.result }
+                .subscribe {
+                    result = it
+                    println(it)
+                }
+
+        assertThat(result.ask).isGreaterThan(0.0)
+        assertThat(result.bid).isGreaterThan(0.0)
+    }
 }
