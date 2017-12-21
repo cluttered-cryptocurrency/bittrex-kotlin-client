@@ -1,8 +1,9 @@
-package com.cluttered.cryptocurrency
+package com.cluttered.cryptocurrency.examples
 
+import com.cluttered.cryptocurrency.PublicBittrexClient
 import io.reactivex.Observable
 
-object Main {
+object PublicBittrexClientExample {
 
     private val bittrexClient = PublicBittrexClient()
 
