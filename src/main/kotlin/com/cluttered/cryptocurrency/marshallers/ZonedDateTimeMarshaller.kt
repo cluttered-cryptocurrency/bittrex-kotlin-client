@@ -6,16 +6,12 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class ZonedDateTimeMarshaller : JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
+class ZonedDateTimeMarshaller : JsonDeserializer<ZonedDateTime> {
 
     companion object {
         val FORMATTER: DateTimeFormatter = DateTimeFormatter
                 .ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]")
                 .withZone(ZoneId.of("UTC"))
-    }
-
-    override fun serialize(src: ZonedDateTime, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
-        return JsonPrimitive(FORMATTER.format(src))
     }
 
     @Throws(JsonParseException::class)
