@@ -54,7 +54,7 @@ class PublicBittrexServiceTest {
                 .map { it.result }
                 .subscribe {
                     result = it
-                    println(it)
+                    println("$market: $it")
                 }
 
         assertThat(result.ask).isGreaterThan(0.0)
