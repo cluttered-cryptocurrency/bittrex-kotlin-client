@@ -7,9 +7,19 @@ branches:
   only:
     - master
 
-after_success:
+install:
+  - echo "skip 'gradle assemble' step"
+
+script:
+  - ./gradlew build --continue
   - ./gradlew jacocoTestReport
+
+after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+#after_success:
+#  - ./gradlew jacocoTestReport
+#  - bash <(curl -s https://codecov.io/bash)
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
