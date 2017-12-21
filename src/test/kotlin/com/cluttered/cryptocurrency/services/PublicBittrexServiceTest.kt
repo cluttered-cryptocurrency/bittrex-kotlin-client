@@ -1,5 +1,6 @@
 package com.cluttered.cryptocurrency.services
 
+import com.cluttered.cryptocurrency.model.OrderLists
 import com.cluttered.cryptocurrency.model.Ticker
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
@@ -93,5 +94,46 @@ class PublicBittrexServiceTest {
                 }
 
         assertThat(result).isEqualTo(expectedMarketName)
+    }
+
+    @Test
+    fun testBothOrderLists() {
+        val marketName = "BTC-ARDR"
+        var buyCount = -1
+        var sellCount = -1
+        val orderListsObservable = publicBittrexService
+                .getBothOrderBook(marketName)
+                .filter { it.success }
+                .map { it.result }
+
+        orderListsObservable.subscribe { buyCount = it.buy.size }
+        orderListsObservable.subscribe { sellCount = it.sell.size }
+
+        assertThat(buyCount).isGreaterThan(-1)
+        assertThat(sellCount).isGreaterThan(-1)
+    }
+
+    @Test
+    fun testBuyOrderList() {
+        val marketName = "BTC-ARDR"
+        var count = -1
+        publicBittrexService.getBuyOrderBook(marketName)
+                .filter { it.success }
+                .map { it.result }
+                .subscribe { count = it.size }
+
+        assertThat(count).isGreaterThan(-1)
+    }
+
+    @Test
+    fun testSellOrderList() {
+        val marketName = "BTC-ARDR"
+        var count = -1
+        publicBittrexService.getSellOrderBook(marketName)
+                .filter { it.success }
+                .map { it.result }
+                .subscribe { count = it.size }
+
+        assertThat(count).isGreaterThan(-1)
     }
 }
