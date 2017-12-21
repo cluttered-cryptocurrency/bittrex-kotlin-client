@@ -59,5 +59,23 @@ class PublicBittrexServiceTest {
 
         assertThat(result.ask).isGreaterThan(0.0)
         assertThat(result.bid).isGreaterThan(0.0)
+        assertThat(result.last).isGreaterThan(0.0)
+    }
+
+    @Test
+    fun testMarketSummaries() {
+        val expectedMarketName = "BTC-ETH"
+        var result = ""
+        publicBittrexService.getMarketSummaries()
+                .filter { it.success }
+                .map { it.result }
+                .flatMap { Observable.fromIterable(it) }
+                .filter { it.marketName == expectedMarketName }
+                .subscribe {
+                    result = it.marketName
+                    println(it)
+                }
+
+        assertThat(result).isEqualTo(expectedMarketName)
     }
 }

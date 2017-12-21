@@ -1,10 +1,7 @@
 package com.cluttered.cryptocurrency.services
 
 import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeDeserializer
-import com.cluttered.cryptocurrency.model.ApiResponse
-import com.cluttered.cryptocurrency.model.Currency
-import com.cluttered.cryptocurrency.model.Market
-import com.cluttered.cryptocurrency.model.Ticker
+import com.cluttered.cryptocurrency.model.*
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -48,4 +45,7 @@ interface PublicBittrexService {
 
     @GET("$V1_PUBLIC/getticker")
     fun getTicker(@Query(MARKET) market: String): Observable<ApiResponse<Ticker>>
+
+    @GET("$V1_PUBLIC/getmarketsummaries")
+    fun getMarketSummaries(): Observable<ApiResponse<List<MarketSummary>>>
 }
