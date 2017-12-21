@@ -6,7 +6,7 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class ZonedDateTimeMarshaller : JsonDeserializer<ZonedDateTime> {
+class ZonedDateTimeDeserializer : JsonDeserializer<ZonedDateTime> {
 
     companion object {
         val FORMATTER: DateTimeFormatter = DateTimeFormatter

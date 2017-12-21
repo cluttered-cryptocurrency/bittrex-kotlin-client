@@ -1,6 +1,6 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeMarshaller
+import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeDeserializer
 import com.cluttered.cryptocurrency.model.ApiResponse
 import com.cluttered.cryptocurrency.model.Currency
 import com.cluttered.cryptocurrency.model.Market
@@ -19,7 +19,7 @@ interface PublicBittrexService {
 
         fun create(): PublicBittrexService {
             val gson = GsonBuilder()
-                    .registerTypeAdapter(ZonedDateTime::class.java, ZonedDateTimeMarshaller())
+                    .registerTypeAdapter(ZonedDateTime::class.java, ZonedDateTimeDeserializer())
                     .serializeNulls()
                     .create()
 
