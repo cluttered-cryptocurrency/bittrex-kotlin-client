@@ -12,14 +12,15 @@ import java.time.ZonedDateTime
 object RetrofitFactory {
 
     @JvmStatic
-    fun create(secret: String = ""): Retrofit {
+    fun create(key: String = "", secret: String = ""): Retrofit {
         val builder = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(createGsonConverterFactory())
                 .baseUrl("https://bittrex.com/api/")
 
-        if (secret.isNotBlank())
-            builder.client(createApiSignInterceptor(secret))
+        if (key.isNotBlank() && secret.isNotBlank()) {
+            builder.client(createOkHttpClient(key, secret))
+        }
 
         return builder.build()
     }
@@ -34,9 +35,9 @@ object RetrofitFactory {
     }
 
     @JvmStatic
-    private fun createApiSignInterceptor(secret: String): OkHttpClient {
+    private fun createOkHttpClient(key: String, secret: String): OkHttpClient {
         return OkHttpClient.Builder()
-                .addNetworkInterceptor(ApiSignInterceptor(secret))
+                .addNetworkInterceptor(ApiSignInterceptor(key, secret))
                 .build()
     }
 }

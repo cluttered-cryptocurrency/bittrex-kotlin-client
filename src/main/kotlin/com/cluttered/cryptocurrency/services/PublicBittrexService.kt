@@ -1,16 +1,11 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeDeserializer
 import com.cluttered.cryptocurrency.model.*
 import com.cluttered.cryptocurrency.retrofit.RetrofitFactory
-import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.time.ZonedDateTime
 
 interface PublicBittrexService {
 
