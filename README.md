@@ -22,3 +22,8 @@ object Main {
 }
 ```
 [More Examples](https://github.com/cluttered-cryptocurrency/bittrex-kotlin-client/tree/master/src/main/kotlin/com/cluttered/cryptocurrency/examples)
+
+## Donations
+* BTC: **1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT**
+* ETH: **0x6d8770cd2fb3233acf30d8ff48b35f912b05b151**
+* LTC: **LhpEZm9iufnpQZ9qTWH8BhLCjPVL6VhCog**
