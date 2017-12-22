@@ -48,7 +48,7 @@ class PublicBittrexServiceTest {
     @Test
     fun testArdrTicker() {
         val market = "BTC-ARDR"
-        var result = Tick(0.0,0.0,0.0)
+        var result = Tick(0.0, 0.0, 0.0)
         publicBittrexService.getTicker(market)
                 .filter { it.success }
                 .map { it.result }

@@ -1,7 +1,6 @@
 package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.UUID
 
 data class Balance(
         @SerializedName("Currency") val currency: String,

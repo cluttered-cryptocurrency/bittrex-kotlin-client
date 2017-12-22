@@ -16,8 +16,9 @@ class ApiSignInterceptor(private val key: String, secret: String) : Interceptor 
 
         val currentMillis = System.currentTimeMillis()
         var modifiedUrl = url.toString()
-        modifiedUrl += (if (modifiedUrl.contains('?')) '&' else '?') +
-                "apikey=$key&nonce=$currentMillis"
+        modifiedUrl += (if (modifiedUrl.contains('?')) '&' else '?')
+        modifiedUrl += "apikey=$key&nonce=$currentMillis"
+
         val signedUrl = hmacSHA512.encode(modifiedUrl)
         val request = chain.request().newBuilder()
                 .url(modifiedUrl)
