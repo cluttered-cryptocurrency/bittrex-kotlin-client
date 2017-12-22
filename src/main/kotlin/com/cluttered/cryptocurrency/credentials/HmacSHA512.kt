@@ -6,25 +6,26 @@ import java.security.SignatureException
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-class HmacSha512(secret: String) {
+class HmacSHA512(secret: String) {
 
     companion object {
-        private const val HMAC_SHA512 = "HmacSHA512"
+        private const val HEX_FORMAT = "%02X"
     }
 
     private val mac: Mac
 
     init {
+        val hmacSHA512 = "HmacSHA512"
         val secretBytes = secret.toByteArray()
-        val secretKeySpec = SecretKeySpec(secretBytes, HMAC_SHA512)
-        mac = Mac.getInstance(HMAC_SHA512)
+        val secretKeySpec = SecretKeySpec(secretBytes, hmacSHA512)
+        mac = Mac.getInstance(hmacSHA512)
         mac.init(secretKeySpec)
     }
 
     @Throws(SignatureException::class, NoSuchAlgorithmException::class, InvalidKeyException::class)
     fun encode(uri: String): String {
         return mac.doFinal(uri.toByteArray())
-                .map { String.format("%02X", it) }
+                .map { String.format(HEX_FORMAT, it) }
                 .reduce { acc, str -> acc + str }
     }
 }
