@@ -2,6 +2,7 @@ package com.cluttered.cryptocurrency.services
 
 import com.cluttered.cryptocurrency.marshallers.ZonedDateTimeDeserializer
 import com.cluttered.cryptocurrency.model.*
+import com.cluttered.cryptocurrency.retrofit.RetrofitFactory
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -17,20 +18,7 @@ interface PublicBittrexService {
         const val V1_PUBLIC: String = "v1.1/public"
         const val MARKET: String = "market"
 
-        fun create(): PublicBittrexService {
-            val gson = GsonBuilder()
-                    .registerTypeAdapter(ZonedDateTime::class.java, ZonedDateTimeDeserializer())
-                    .serializeNulls()
-                    .create()
-
-            val retrofit = Retrofit.Builder()
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .baseUrl("https://bittrex.com/api/")
-                    .build()
-
-            return create(retrofit)
-        }
+        fun create() = create(RetrofitFactory.create())
 
         fun create(retrofit: Retrofit): PublicBittrexService {
             return retrofit.create(PublicBittrexService::class.java)
