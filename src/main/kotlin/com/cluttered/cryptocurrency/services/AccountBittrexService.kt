@@ -1,12 +1,11 @@
 package com.cluttered.cryptocurrency.services
 
-import com.cluttered.cryptocurrency.model.ApiResponse
-import com.cluttered.cryptocurrency.model.Balance
-import com.cluttered.cryptocurrency.model.DepositAddress
+import com.cluttered.cryptocurrency.model.*
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.*
 
 interface AccountBittrexService {
 
@@ -27,4 +26,14 @@ interface AccountBittrexService {
 
     @GET("$V1_ACCOUNT/getdepositaddress")
     fun getDepositAddress(@Query(CURRENCY) currency: String): Observable<ApiResponse<DepositAddress>>
+
+    @GET("$V1_ACCOUNT/withdraw")
+    fun withdraw(@Query(CURRENCY) currency: String,
+                 @Query("quantity") quantity: Double,
+                 @Query("address") address: String,
+                 @Query("paymentid") paymentId: String = ""):
+            Observable<ApiResponse<UuidResponse>>
+
+    @GET("$V1_ACCOUNT/getorder")
+    fun getOrder(@Query("uuid") uuid: UUID): Observable<ApiResponse<List<AccountOrder>>>
 }
