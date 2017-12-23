@@ -24,8 +24,8 @@ object PublicBittrexClientExample {
                 .flatMap { Observable.fromIterable(it.result) }
                 .subscribe { println(it) }
 
-        // Current Tick
-        println("\n\n################ BTC-ETH Tick ################")
+        // Current Ticker
+        println("\n\n################ BTC-ETH Ticker ################")
         bittrexClient.public.getTicker("BTC-ETH")
                 .filter { it.success }
                 .subscribe { println(it.result) }
