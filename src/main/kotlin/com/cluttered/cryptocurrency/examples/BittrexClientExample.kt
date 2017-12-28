@@ -39,5 +39,11 @@ object BittrexClientExample {
                 .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
                 .subscribe { println(it) }
+
+        // Deposit Address
+        println("\n\n################ Deposit Address ################")
+        bittrexClient.account.getDepositAddress("BTC")
+                .filter { it.success }
+                .subscribe { println(it.result.address) }
     }
 }
