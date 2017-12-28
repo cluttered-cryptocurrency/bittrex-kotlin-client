@@ -17,6 +17,7 @@ ext {
 
     signalr_version = '2.7.0.3'
     retrofit_version = '2.3.0'
+    retrofit_log_version = '3.9.1'
     rxkotlin_version = '2.1.0'
 
     junit_version = '4.12'
@@ -36,6 +37,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "com.squareup.okhttp3:logging-interceptor:$retrofit_log_version"
 
     compile "net.donky:donky-signalr:$signalr_version"
 
