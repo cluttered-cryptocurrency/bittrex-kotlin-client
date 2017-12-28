@@ -1,6 +1,7 @@
 package com.cluttered.cryptocurrency.services
 
 import com.cluttered.cryptocurrency.model.ApiResponse
+import com.cluttered.cryptocurrency.model.FundTransaction
 import com.cluttered.cryptocurrency.model.OpenOrder
 import com.cluttered.cryptocurrency.model.UuidResponse
 import io.reactivex.Observable
@@ -12,6 +13,7 @@ import java.util.*
 interface MarketBittrexService {
 
     companion object {
+        const val CURRENCY = "currency"
         const val MARKET = "market"
         const val V1_MARKET = "v1.1/$MARKET"
         const val QUANTITY = "quantity"
@@ -35,4 +37,10 @@ interface MarketBittrexService {
 
     @GET("$V1_MARKET/getopenorders")
     fun getOpenOrders(@Query(MARKET) market: String = ""): Observable<ApiResponse<List<OpenOrder>>>
+
+    @GET("$V1_MARKET/getwithdrawalhistory")
+    fun getWithdrawalHistory(@Query(CURRENCY) currency: String = ""): Observable<ApiResponse<List<FundTransaction>>>
+
+    @GET("$V1_MARKET/getdeposithistory")
+    fun getDepositHistory(@Query(CURRENCY) currency: String = ""): Observable<ApiResponse<List<FundTransaction>>>
 }
