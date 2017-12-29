@@ -46,8 +46,8 @@ class PublicBittrexServiceTest {
     }
 
     @Test
-    fun testArdrTicker() {
-        val market = "BTC-ARDR"
+    fun testTicker() {
+        val market = "BTC-ETH"
         var result = Ticker(0.0, 0.0, 0.0)
         publicBittrexService.getTicker(market)
                 .filter { it.success }
@@ -97,7 +97,7 @@ class PublicBittrexServiceTest {
 
     @Test
     fun testOrderLists() {
-        val marketName = "BTC-ARDR"
+        val marketName = "BTC-ETH"
         var buyCount = -1
         var sellCount = -1
         val orderListsObservable = publicBittrexService
@@ -114,7 +114,7 @@ class PublicBittrexServiceTest {
 
     @Test
     fun testBuyOrderList() {
-        val marketName = "BTC-ARDR"
+        val marketName = "BTC-ETH"
         var count = -1
         publicBittrexService.getBuyOrderBook(marketName)
                 .filter { it.success }
@@ -126,7 +126,7 @@ class PublicBittrexServiceTest {
 
     @Test
     fun testSellOrderList() {
-        val marketName = "BTC-ARDR"
+        val marketName = "BTC-ETH"
         var count = -1
         publicBittrexService.getSellOrderBook(marketName)
                 .filter { it.success }
