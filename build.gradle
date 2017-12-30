@@ -1,17 +1,27 @@
+buildscript {
+    ext {
+        kotlin_version = '1.2.10'
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
 plugins {
     id 'jacoco'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.10'
 }
+
+apply plugin: 'org.jetbrains.kotlin.jvm'
 
 if (!JavaVersion.current().java8Compatible) {
     throw new IllegalStateException("Must be built with Java 8 or higher")
 }
 
 group 'com.cluttered-cryptocurrency'
-version '0.3.0'
+version '0.3.1'
 
 ext {
-    _gradle_version = '4.3.1'
+    _gradle_version = '4.4.1'
 
     slf4j_version = '1.7.25'
 
@@ -31,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:1.2.10"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "org.slf4j:slf4j-api:$slf4j_version"
 
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
