@@ -6,8 +6,8 @@ import io.reactivex.Observable
 object BittrexClientExample {
 
     private val bittrexClient = BittrexClient(
-            "YOUR KEY",
-            "YOUR SECRET")
+            "d1caaed14e7d427488445a4e02a4760f",
+            "38660a5c5b7341efae27799e991b4c0b")
 
     @JvmStatic
     fun main(args: Array<String>) {
