@@ -15,6 +15,8 @@ script:
   - ./gradlew jacocoTestReport
 
 after_success:
+  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/2.0.2/codacy-coverage-reporter-2.0.2-assembly.jar -O codacy-coverage-reporter-assembly.jar
+  - java -cp codacy-coverage-reporter-assembly.jar com.codacy.CodacyCoverageReporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
   - bash <(curl -s https://codecov.io/bash)
 
 before_cache:
