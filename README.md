@@ -6,6 +6,8 @@
 [![Jitpack](https://jitpack.io/v/cluttered-cryptocurrency/bittrex-kotlin-client.svg)](https://jitpack.io/#cluttered-cryptocurrency/bittrex-kotlin-client)
 
 ## Usage
+
+### Public
 ```kotlin
 object Main {
 
@@ -14,6 +16,7 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
 
+        // List Markets
         bittrexClient.public.getMarkets()
                 .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
@@ -21,9 +24,61 @@ object Main {
     }
 }
 ```
-[More Examples](https://github.com/cluttered-cryptocurrency/bittrex-kotlin-client/tree/master/src/main/kotlin/com/cluttered/cryptocurrency/examples)
+
+### Secure
+```kotlin
+object Main {
+
+    private val key = "YOUR_API_KEY"
+    private val secret = "YOUR_API_SECRET"
+    private val bittrexClient = BittrexClient(key, secret)
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+
+        // List Account Balances
+        bittrexClient.account.getBalances()
+                .filter { it.success }
+                .flatMap { Observable.fromIterable(it.result) }
+                .subscribe { println(it) }
+    }
+}
+```
+
+#### [More Examples](https://github.com/cluttered-cryptocurrency/bittrex-kotlin-client/tree/master/src/main/kotlin/com/cluttered/cryptocurrency/examples)
+
+## Import
+
+### Gradle
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile 'com.github.cluttered-cryptocurrency:bittrex-kotlin-client:1.0.0'
+}
+```
+
+### Maven
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>com.github.cluttered-cryptocurrency</groupId>
+    <artifactId>bittrex-kotlin-client</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 ## Donations
-* BTC: **1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT**
-* ETH: **0x6d8770cd2fb3233acf30d8ff48b35f912b05b151**
-* LTC: **LhpEZm9iufnpQZ9qTWH8BhLCjPVL6VhCog**
+
+### Bitcoin
+![1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT](https://raw.githubusercontent.com/cluttered-cryptocurrency/bittrex-kotlin-client/master/qr-codes/bitcoin-qr-1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT.png)
+
+**1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT**
