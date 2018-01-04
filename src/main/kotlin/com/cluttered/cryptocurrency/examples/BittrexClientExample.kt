@@ -5,9 +5,9 @@ import io.reactivex.Observable
 
 object BittrexClientExample {
 
-    private val bittrexClient = BittrexClient(
-            "d1caaed14e7d427488445a4e02a4760f",
-            "38660a5c5b7341efae27799e991b4c0b")
+    private val key = "YOUR_API_KEY"
+    private val secret = "YOUR_API_SECRET"
+    private val bittrexClient = BittrexClient(key, secret)
 
     @JvmStatic
     fun main(args: Array<String>) {
