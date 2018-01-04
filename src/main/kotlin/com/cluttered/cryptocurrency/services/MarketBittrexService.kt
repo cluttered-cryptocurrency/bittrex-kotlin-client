@@ -8,6 +8,7 @@ import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.math.BigDecimal
 import java.util.*
 
 interface MarketBittrexService {
@@ -25,11 +26,11 @@ interface MarketBittrexService {
     }
 
     @GET("$V1_MARKET/buylimit")
-    fun buyLimit(@Query(MARKET) market: String, @Query(QUANTITY) quantity: Double, @Query(RATE) rate: Double)
+    fun buyLimit(@Query(MARKET) market: String, @Query(QUANTITY) quantity: BigDecimal, @Query(RATE) rate: BigDecimal)
             : Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_MARKET/selllimit")
-    fun sellLimit(@Query(MARKET) market: String, @Query(QUANTITY) quantity: Double, @Query(RATE) rate: Double)
+    fun sellLimit(@Query(MARKET) market: String, @Query(QUANTITY) quantity: BigDecimal, @Query(RATE) rate: BigDecimal)
             : Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_MARKET/cancel")

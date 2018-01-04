@@ -1,12 +1,13 @@
 package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 data class Market(
         @SerializedName("MarketName") val marketName: String,
         @SerializedName("IsActive") val isActive: Boolean,
-        @SerializedName("MinTradeSize") val minTradeSize: Double,
+        @SerializedName("MinTradeSize") val minTradeSize: BigDecimal,
 
         @SerializedName("MarketCurrency") val marketCurrency: String,
         @SerializedName("MarketCurrencyLong") val marketCurrencyLong: String,

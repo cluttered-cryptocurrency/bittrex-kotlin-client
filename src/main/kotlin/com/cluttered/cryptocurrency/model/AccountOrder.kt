@@ -1,6 +1,7 @@
 package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -8,16 +9,16 @@ data class AccountOrder(
         @SerializedName("OrderUuid") val orderUuid: UUID,
         @SerializedName("Exchange") val exchange: String,
         @SerializedName("Type") val orderType: OpenOrder.OrderType,
-        @SerializedName("Quantity") val quantity: Double,
-        @SerializedName("QuantityRemaining") val quantityRemaining: Double,
-        @SerializedName("Limit") val limit: Double,
-        @SerializedName("Reserved") val reserved: Double,
-        @SerializedName("ReserveRemaining") val reserveRemaining: Double,
-        @SerializedName("CommissionReserved") val commissionReserved: Double,
-        @SerializedName("CommissionReserveRemaining") val commissionReserveRemaining: Double,
-        @SerializedName("CommissionPaid") val commissionPaid: Double,
-        @SerializedName("Price") val price: Double,
-        @SerializedName("PricePerUnit") val pricePerUnit: Double,
+        @SerializedName("Quantity") val quantity: BigDecimal,
+        @SerializedName("QuantityRemaining") val quantityRemaining: BigDecimal,
+        @SerializedName("Limit") val limit: BigDecimal,
+        @SerializedName("Reserved") val reserved: BigDecimal,
+        @SerializedName("ReserveRemaining") val reserveRemaining: BigDecimal,
+        @SerializedName("CommissionReserved") val commissionReserved: BigDecimal,
+        @SerializedName("CommissionReserveRemaining") val commissionReserveRemaining: BigDecimal,
+        @SerializedName("CommissionPaid") val commissionPaid: BigDecimal,
+        @SerializedName("Price") val price: BigDecimal,
+        @SerializedName("PricePerUnit") val pricePerUnit: BigDecimal,
         @SerializedName("Opened") val opened: ZonedDateTime,
         @SerializedName("Closed") val closed: ZonedDateTime?,
         @SerializedName("IsOpen") val isOpen: Boolean,

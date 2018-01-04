@@ -4,6 +4,7 @@ import com.cluttered.cryptocurrency.model.*
 import io.reactivex.Observable
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import java.math.BigDecimal
 
 class PublicBittrexServiceTest {
 
@@ -48,7 +49,7 @@ class PublicBittrexServiceTest {
     @Test
     fun testTicker() {
         val market = "BTC-ETH"
-        var result = Ticker(0.0, 0.0, 0.0)
+        var result = Ticker(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO)
         publicBittrexService.getTicker(market)
                 .filter { it.success }
                 .map { it.result }
@@ -57,9 +58,9 @@ class PublicBittrexServiceTest {
                     println("$market: $it")
                 }
 
-        assertThat(result.ask).isGreaterThan(0.0)
-        assertThat(result.bid).isGreaterThan(0.0)
-        assertThat(result.last).isGreaterThan(0.0)
+        assertThat(result.ask).isGreaterThan(BigDecimal.ZERO)
+        assertThat(result.bid).isGreaterThan(BigDecimal.ZERO)
+        assertThat(result.last).isGreaterThan(BigDecimal.ZERO)
     }
 
     @Test

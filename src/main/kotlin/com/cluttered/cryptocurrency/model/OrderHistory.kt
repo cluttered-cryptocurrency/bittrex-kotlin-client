@@ -1,6 +1,7 @@
 package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -9,12 +10,12 @@ data class OrderHistory(
         @SerializedName("Exchange") val exchange: String,
         @SerializedName("TimeStamp") val timestamp: ZonedDateTime,
         @SerializedName("OrderType") val orderType: OpenOrder.OrderType,
-        @SerializedName("Limit") val limit: Double,
-        @SerializedName("Quantity") val quantity: Double,
-        @SerializedName("QuantityRemaining") val quantityRemaining: Double,
-        @SerializedName("Commission") val commission: Double,
-        @SerializedName("Price") val price: Double,
-        @SerializedName("PricePerUnit") val pricePerUnit: Double,
+        @SerializedName("Limit") val limit: BigDecimal,
+        @SerializedName("Quantity") val quantity: BigDecimal,
+        @SerializedName("QuantityRemaining") val quantityRemaining: BigDecimal,
+        @SerializedName("Commission") val commission: BigDecimal,
+        @SerializedName("Price") val price: BigDecimal,
+        @SerializedName("PricePerUnit") val pricePerUnit: BigDecimal,
         @SerializedName("ImmediateOrCancel") val immediateOrCancel: Boolean,
         @SerializedName("IsConditional") val isConditional: Boolean,
         @SerializedName("Condition") val condition: OpenOrder.Condition,

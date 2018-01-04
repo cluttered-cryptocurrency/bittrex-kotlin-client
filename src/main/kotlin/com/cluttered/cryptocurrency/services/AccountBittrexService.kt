@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.math.BigDecimal
 import java.util.*
 
 interface AccountBittrexService {
@@ -29,7 +30,7 @@ interface AccountBittrexService {
 
     @GET("$V1_ACCOUNT/withdraw")
     fun withdraw(@Query(CURRENCY) currency: String,
-                 @Query("quantity") quantity: Double,
+                 @Query("quantity") quantity: BigDecimal,
                  @Query("address") address: String,
                  @Query("paymentid") paymentId: String = ""):
             Observable<ApiResponse<UuidResponse>>
