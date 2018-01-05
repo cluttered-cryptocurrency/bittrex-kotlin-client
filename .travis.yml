@@ -18,8 +18,10 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -f  .gradle/caches/modules-2/modules-2.lock
+  - rm -fr .gradle/caches/*/plugin-resolution/
+  - rm -f  .gradle/caches/*/fileHashes/fileHashes.bin
+  - rm -f  .gradle/caches/*/fileHashes/fileHashes.lock
 cache:
   directories:
     - $HOME/.gradle/caches/
