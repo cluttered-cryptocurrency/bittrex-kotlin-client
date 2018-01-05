@@ -2,13 +2,13 @@ package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
-import java.time.ZonedDateTime
+import java.time.Instant
 import java.util.*
 
 data class OrderHistory(
         @SerializedName("OrderUuid") val orderUuid: UUID,
         @SerializedName("Exchange") val exchange: String,
-        @SerializedName("TimeStamp") val timestamp: ZonedDateTime,
+        @SerializedName("TimeStamp") val timestamp: Instant,
         @SerializedName("OrderType") val orderType: OpenOrder.OrderType,
         @SerializedName("Limit") val limit: BigDecimal,
         @SerializedName("Quantity") val quantity: BigDecimal,

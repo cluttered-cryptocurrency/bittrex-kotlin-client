@@ -2,11 +2,11 @@ package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
-import java.time.ZonedDateTime
+import java.time.Instant
 
 data class MarketHistory(
         @SerializedName("Id") val id: Long,
-        @SerializedName("TimeStamp") val timestamp: ZonedDateTime,
+        @SerializedName("TimeStamp") val timestamp: Instant,
         @SerializedName("Quantity") val quantity: BigDecimal,
         @SerializedName("Price") val price: BigDecimal,
         @SerializedName("Total") val total: BigDecimal,

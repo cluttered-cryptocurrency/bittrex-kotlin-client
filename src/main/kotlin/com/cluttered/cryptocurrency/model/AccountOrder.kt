@@ -2,7 +2,7 @@ package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
-import java.time.ZonedDateTime
+import java.time.Instant
 import java.util.*
 
 data class AccountOrder(
@@ -19,8 +19,8 @@ data class AccountOrder(
         @SerializedName("CommissionPaid") val commissionPaid: BigDecimal,
         @SerializedName("Price") val price: BigDecimal,
         @SerializedName("PricePerUnit") val pricePerUnit: BigDecimal,
-        @SerializedName("Opened") val opened: ZonedDateTime,
-        @SerializedName("Closed") val closed: ZonedDateTime?,
+        @SerializedName("Opened") val opened: Instant,
+        @SerializedName("Closed") val closed: Instant?,
         @SerializedName("IsOpen") val isOpen: Boolean,
         @SerializedName("Sentinel") val sentinel: UUID,
         @SerializedName("CancelInitiated") val cancelInitiated: Boolean,

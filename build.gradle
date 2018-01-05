@@ -21,7 +21,7 @@ if (!JavaVersion.current().java8Compatible) {
 }
 
 group 'com.cluttered-cryptocurrency'
-version '1.0.0'
+version '2.0.0'
 
 ext {
     _gradle_version = '4.4.1'
@@ -82,7 +82,6 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
-
 
 task wrapper(type: Wrapper) {
     gradleVersion = _gradle_version

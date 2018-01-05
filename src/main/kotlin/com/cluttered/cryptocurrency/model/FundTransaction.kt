@@ -2,7 +2,7 @@ package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
-import java.time.ZonedDateTime
+import java.time.Instant
 import java.util.*
 
 data class FundTransaction(
@@ -10,7 +10,7 @@ data class FundTransaction(
         @SerializedName("Currency") val currency: String,
         @SerializedName("Amount") val amount: BigDecimal,
         @SerializedName("Address") val address: String,
-        @SerializedName("Opened") val opened: ZonedDateTime,
+        @SerializedName("Opened") val opened: Instant,
         @SerializedName("Authorized") val authorized: Boolean,
         @SerializedName("PendingPayment") val pendingPayment: Boolean,
         @SerializedName("TxCost") val txCost: BigDecimal,

@@ -2,11 +2,11 @@ package com.cluttered.cryptocurrency.model
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal
-import java.time.ZonedDateTime
+import java.time.Instant
 
 data class MarketSummary(
         @SerializedName("MarketName") val marketName: String,
-        @SerializedName("TimeStamp") val timestamp: ZonedDateTime,
+        @SerializedName("TimeStamp") val timestamp: Instant,
 
         @SerializedName("High") val high: BigDecimal,
         @SerializedName("Low") val low: BigDecimal,
@@ -22,5 +22,5 @@ data class MarketSummary(
         @SerializedName("OpenSellOrders") val openSellOrders: Int,
 
         @SerializedName("PrevDay") val previousDay: BigDecimal,
-        @SerializedName("Created") val created: ZonedDateTime
+        @SerializedName("Created") val created: Instant
 )
