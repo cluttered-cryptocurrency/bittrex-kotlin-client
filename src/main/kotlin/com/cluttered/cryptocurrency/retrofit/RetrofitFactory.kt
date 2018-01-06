@@ -5,11 +5,11 @@ import com.cluttered.cryptocurrency.marshallers.InstantDeserializer
 import com.google.gson.GsonBuilder
 import devcsrj.okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.OkHttpClient
+import org.slf4j.LoggerFactory
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Instant
-import org.slf4j.LoggerFactory
 
 
 object RetrofitFactory {
@@ -39,6 +39,7 @@ object RetrofitFactory {
     private fun createOkHttpClient(key: String, secret: String): OkHttpClient {
         val builder = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor(LOG))
+                .cookieJar(HostCookieJar)
 
         if (key.isNotBlank() && secret.isNotBlank()) {
             builder.addNetworkInterceptor(ApiSignInterceptor(key, secret))

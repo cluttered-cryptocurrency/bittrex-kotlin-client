@@ -21,7 +21,7 @@ if (!JavaVersion.current().java8Compatible) {
 }
 
 group 'com.cluttered-cryptocurrency'
-version '2.0.0'
+version '2.1.0'
 
 ext {
     _gradle_version = '4.4.1'
@@ -29,6 +29,7 @@ ext {
     slf4j_version = '1.7.25'
     slf4j_okhttp_version = '1.0.1'
 
+    okhttp_version = '3.9.1'
     signalr_version = '2.7.0.3'
     retrofit_version = '2.3.0'
     retrofit_log_version = '3.9.1'
@@ -50,6 +51,7 @@ dependencies {
     compile "org.slf4j:slf4j-api:$slf4j_version"
     compile "com.github.devcsrj:slf4j-okhttp3-logging-interceptor:$slf4j_okhttp_version"
 
+    compile "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_version"
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
