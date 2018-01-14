@@ -21,29 +21,29 @@ interface PublicBittrexService {
     }
 
     @GET("$V1_PUBLIC/getmarkets")
-    fun getMarkets(): Observable<ApiResponse<List<Market>>>
+    fun getMarkets(): Observable<ApiResponse<MutableList<Market>>>
 
     @GET("$V1_PUBLIC/getcurrencies")
-    fun getCurrencies(): Observable<ApiResponse<List<Currency>>>
+    fun getCurrencies(): Observable<ApiResponse<MutableList<Currency>>>
 
     @GET("$V1_PUBLIC/getticker")
     fun getTicker(@Query(MARKET) market: String): Observable<ApiResponse<Ticker>>
 
     @GET("$V1_PUBLIC/getmarketsummaries")
-    fun getMarketSummaries(): Observable<ApiResponse<List<MarketSummary>>>
+    fun getMarketSummaries(): Observable<ApiResponse<MutableList<MarketSummary>>>
 
     @GET("$V1_PUBLIC/getmarketsummary")
-    fun getMarketSummary(@Query(MARKET) market: String): Observable<ApiResponse<List<MarketSummary>>>
+    fun getMarketSummary(@Query(MARKET) market: String): Observable<ApiResponse<MutableList<MarketSummary>>>
 
     @GET("$V1_PUBLIC/getorderbook?type=both")
     fun getOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<OrderLists>>
 
     @GET("$V1_PUBLIC/getorderbook?type=buy")
-    fun getBuyOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<List<Order>>>
+    fun getBuyOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<MutableList<Order>>>
 
     @GET("$V1_PUBLIC/getorderbook?type=sell")
-    fun getSellOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<List<Order>>>
+    fun getSellOrderBook(@Query(MARKET) market: String): Observable<ApiResponse<MutableList<Order>>>
 
     @GET("$V1_PUBLIC/getmarkethistory")
-    fun getMarketHistory(@Query(MARKET) market: String): Observable<ApiResponse<List<MarketHistory>>>
+    fun getMarketHistory(@Query(MARKET) market: String): Observable<ApiResponse<MutableList<MarketHistory>>>
 }

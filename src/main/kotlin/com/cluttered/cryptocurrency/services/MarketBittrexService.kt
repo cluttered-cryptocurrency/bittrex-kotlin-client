@@ -37,11 +37,11 @@ interface MarketBittrexService {
     fun cancel(@Query("uuid") uuid: UUID): Observable<ApiResponse<UUID>>
 
     @GET("$V1_MARKET/getopenorders")
-    fun getOpenOrders(@Query(MARKET) market: String = ""): Observable<ApiResponse<List<OpenOrder>>>
+    fun getOpenOrders(@Query(MARKET) market: String = ""): Observable<ApiResponse<MutableList<OpenOrder>>>
 
     @GET("$V1_MARKET/getwithdrawalhistory")
-    fun getWithdrawalHistory(@Query(CURRENCY) currency: String = ""): Observable<ApiResponse<List<FundTransaction>>>
+    fun getWithdrawalHistory(@Query(CURRENCY) currency: String = ""): Observable<ApiResponse<MutableList<FundTransaction>>>
 
     @GET("$V1_MARKET/getdeposithistory")
-    fun getDepositHistory(@Query(CURRENCY) currency: String = ""): Observable<ApiResponse<List<FundTransaction>>>
+    fun getDepositHistory(@Query(CURRENCY) currency: String = ""): Observable<ApiResponse<MutableList<FundTransaction>>>
 }

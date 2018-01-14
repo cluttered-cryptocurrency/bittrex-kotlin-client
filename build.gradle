@@ -21,7 +21,7 @@ if (!JavaVersion.current().java8Compatible) {
 }
 
 group 'com.cluttered-cryptocurrency'
-version '2.1.0'
+version '2.2.0'
 
 ext {
     _gradle_version = '4.4.1'

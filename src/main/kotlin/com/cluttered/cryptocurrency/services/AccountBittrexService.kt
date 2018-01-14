@@ -20,7 +20,7 @@ interface AccountBittrexService {
     }
 
     @GET("$V1_ACCOUNT/getbalances")
-    fun getBalances(): Observable<ApiResponse<List<Balance>>>
+    fun getBalances(): Observable<ApiResponse<MutableList<Balance>>>
 
     @GET("$V1_ACCOUNT/getbalance")
     fun getBalance(@Query(CURRENCY) currency: String): Observable<ApiResponse<Balance>>
@@ -36,8 +36,8 @@ interface AccountBittrexService {
             Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_ACCOUNT/getorder")
-    fun getOrder(@Query("uuid") uuid: UUID): Observable<ApiResponse<List<AccountOrder>>>
+    fun getOrder(@Query("uuid") uuid: UUID): Observable<ApiResponse<MutableList<AccountOrder>>>
 
     @GET("$V1_ACCOUNT/getorderhistory")
-    fun getOrderHistory(@Query("market") market: String = ""): Observable<ApiResponse<List<OrderHistory>>>
+    fun getOrderHistory(@Query("market") market: String = ""): Observable<ApiResponse<MutableList<OrderHistory>>>
 }
