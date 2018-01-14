@@ -4,6 +4,7 @@ import com.cluttered.cryptocurrency.retrofit.RetrofitFactory
 import com.cluttered.cryptocurrency.services.AccountBittrexService
 import com.cluttered.cryptocurrency.services.MarketBittrexService
 import com.cluttered.cryptocurrency.services.PublicBittrexService
+import com.cluttered.cryptocurrency.services.SocketBittrexService
 
 class BittrexClient(key: String, secret: String) {
 
@@ -19,5 +20,9 @@ class BittrexClient(key: String, secret: String) {
 
     val account by lazy {
         AccountBittrexService.create(retrofit)
+    }
+
+    val socket by lazy {
+        SocketBittrexService
     }
 }

@@ -45,5 +45,13 @@ object BittrexClientExample {
         bittrexClient.account.getDepositAddress("BTC")
                 .filter { it.success }
                 .subscribe { println(it.result.address) }
+
+        // Deposit Address
+        println("\n\n################ Socket ################")
+        bittrexClient.socket.start(Runnable {
+            println("Websocket started")
+        })
+
+        Thread.sleep(10000)
     }
 }
