@@ -60,7 +60,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.cluttered-cryptocurrency:bittrex-kotlin-client:2.3.0'
+    compile 'com.github.cluttered-cryptocurrency:bittrex-kotlin-client:2.3.1'
 }
 ```
 
@@ -76,7 +76,7 @@ dependencies {
 <dependency>
     <groupId>com.github.cluttered-cryptocurrency</groupId>
     <artifactId>bittrex-kotlin-client</artifactId>
-    <version>2.3.0</version>
+    <version>2.3.1</version>
 </dependency>
 ```
 

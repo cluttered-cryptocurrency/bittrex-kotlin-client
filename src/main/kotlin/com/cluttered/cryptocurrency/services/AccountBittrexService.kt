@@ -36,7 +36,7 @@ interface AccountBittrexService {
             Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_ACCOUNT/getorder")
-    fun getOrder(@Query("uuid") uuid: UUID): Observable<ApiResponse<MutableList<AccountOrder>>>
+    fun getOrder(@Query("uuid") uuid: UUID): Observable<ApiResponse<AccountOrder>>
 
     @GET("$V1_ACCOUNT/getorderhistory")
     fun getOrderHistory(@Query("market") market: String = ""): Observable<ApiResponse<MutableList<OrderHistory>>>
