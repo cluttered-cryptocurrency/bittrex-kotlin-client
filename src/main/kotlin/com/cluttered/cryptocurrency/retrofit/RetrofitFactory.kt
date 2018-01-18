@@ -1,6 +1,5 @@
 package com.cluttered.cryptocurrency.retrofit
 
-import com.cluttered.cryptocurrency.adapters.RxJava2ErrorCallAdapterFactory
 import com.cluttered.cryptocurrency.credentials.ApiSignInterceptor
 import com.cluttered.cryptocurrency.marshallers.InstantDeserializer
 import com.google.gson.GsonBuilder
@@ -20,7 +19,7 @@ object RetrofitFactory {
     fun create(key: String = "", secret: String = ""): Retrofit {
         return Retrofit.Builder()
                 .addConverterFactory(createGsonConverterFactory())
-                .addCallAdapterFactory(RxJava2ErrorCallAdapterFactory.create())
+                .addCallAdapterFactory(Rx2ErrorCallAdapterFactory)
                 .client(createOkHttpClient(key, secret))
                 .baseUrl("https://bittrex.com/api/")
                 .build()

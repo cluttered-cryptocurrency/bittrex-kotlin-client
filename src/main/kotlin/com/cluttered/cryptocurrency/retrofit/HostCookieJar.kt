@@ -4,7 +4,7 @@ import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
 
-object HostCookieJar: CookieJar {
+object HostCookieJar : CookieJar {
 
     private var cookies = mutableListOf<Cookie>()
 
