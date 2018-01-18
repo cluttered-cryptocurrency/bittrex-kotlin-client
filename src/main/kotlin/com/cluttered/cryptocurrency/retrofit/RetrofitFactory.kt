@@ -1,5 +1,6 @@
 package com.cluttered.cryptocurrency.retrofit
 
+import com.cluttered.cryptocurrency.adapters.RxJava2ErrorCallAdapterFactory
 import com.cluttered.cryptocurrency.credentials.ApiSignInterceptor
 import com.cluttered.cryptocurrency.marshallers.InstantDeserializer
 import com.google.gson.GsonBuilder
@@ -7,7 +8,6 @@ import devcsrj.okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.OkHttpClient
 import org.slf4j.LoggerFactory
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Instant
 
@@ -19,8 +19,8 @@ object RetrofitFactory {
     @JvmStatic
     fun create(key: String = "", secret: String = ""): Retrofit {
         return Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(createGsonConverterFactory())
+                .addCallAdapterFactory(RxJava2ErrorCallAdapterFactory.create())
                 .client(createOkHttpClient(key, secret))
                 .baseUrl("https://bittrex.com/api/")
                 .build()

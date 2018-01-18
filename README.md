@@ -20,9 +20,10 @@ object Main {
 
         // List Markets
         bittrexClient.public.getMarkets()
-                .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
-                .subscribe { println(it) }
+                .subscribe(
+                        { println(it) },
+                        { println("Bittrex Exception: ${it.message}") })
     }
 }
 ```
@@ -40,9 +41,10 @@ object Main {
 
         // List Account Balances
         bittrexClient.account.getBalances()
-                .filter { it.success }
                 .flatMap { Observable.fromIterable(it.result) }
-                .subscribe { println(it) }
+                .subscribe(
+                        { println(it) },
+                        { println("Bittrex Exception: ${it.message}") })
     }
 }
 ```
@@ -58,7 +60,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.cluttered-cryptocurrency:bittrex-kotlin-client:2.2.0'
+    compile 'com.github.cluttered-cryptocurrency:bittrex-kotlin-client:2.3.0'
 }
 ```
 
@@ -74,7 +76,7 @@ dependencies {
 <dependency>
     <groupId>com.github.cluttered-cryptocurrency</groupId>
     <artifactId>bittrex-kotlin-client</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 

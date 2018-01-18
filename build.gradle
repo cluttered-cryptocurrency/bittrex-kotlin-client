@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlin_version = '1.2.10'
+        kotlin_version = '1.2.20'
     }
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
@@ -21,7 +21,7 @@ if (!JavaVersion.current().java8Compatible) {
 }
 
 group 'com.cluttered-cryptocurrency'
-version '2.2.0'
+version '2.3.0'
 
 ext {
     _gradle_version = '4.4.1'
@@ -46,7 +46,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     compile "org.slf4j:slf4j-api:$slf4j_version"
     compile "com.github.devcsrj:slf4j-okhttp3-logging-interceptor:$slf4j_okhttp_version"
