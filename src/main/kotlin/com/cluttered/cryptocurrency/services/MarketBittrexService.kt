@@ -34,7 +34,7 @@ interface MarketBittrexService {
             : Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_MARKET/cancel")
-    fun cancel(@Query("uuid") uuid: UUID): Observable<ApiResponse<UUID>>
+    fun cancel(@Query("uuid") uuid: UUID): Observable<ApiResponse<UuidResponse>>
 
     @GET("$V1_MARKET/getopenorders")
     fun getOpenOrders(@Query(MARKET) market: String = ""): Observable<ApiResponse<MutableList<OpenOrder>>>
