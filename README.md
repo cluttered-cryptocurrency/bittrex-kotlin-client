@@ -82,7 +82,7 @@ dependencies {
 </dependency>
 ```
 
-## Donation
+## Donations
 
 ### Bitcoin
 ![1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT](https://raw.githubusercontent.com/cluttered-cryptocurrency/bittrex-kotlin-client/master/qr-codes/bitcoin-qr-1BcPBLKspsJ4uD1oQH46Xo4zUU5BicvYaT.png)
